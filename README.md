@@ -1,4 +1,3 @@
 # Webbasert aktivitetsoversikt
 
-
-
+## Description
