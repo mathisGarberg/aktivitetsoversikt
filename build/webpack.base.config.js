@@ -2,17 +2,18 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    entry: '../app/client/index.js',
+    entry: './app/client/index.js',
     output: {
-        path: path.resolve('../public/js'),
+        path: path.resolve('./public/js'),
         filename: 'bundle.js',
+        publicPath: '/public/js',
     },
     devtool: 'source-map',
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,
             compress: {
-                warnings: true,
+                warnings: false,
             },
         }),
     ],

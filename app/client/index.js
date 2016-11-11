@@ -2,15 +2,21 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueRessource from 'vue-resource'
 
-import app from './components/app';
+import routes from './routes';
+
+import App from './components/App.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueRessource);
 
 const router = new VueRouter({
-    hashbang: false,
+    mode: 'history',
+    base: __dirname,
+    routes,
 });
 
-router.start(app, 'app');
-
-window.router = router;
+window.app = new Vue({
+    el: '#app',
+    router,
+    render: h => h(App),
+});
