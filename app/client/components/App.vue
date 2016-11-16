@@ -24,7 +24,6 @@
         background-color: rgb(255, 85, 84);
         display: flex;
         flex-direction: row;
-        /* justify-content: center; */
         justify-content: space-between;
         flex-wrap: nowrap;
 
