@@ -16,6 +16,12 @@
 </template>
 
 <style lang="sass">
+  :root {
+    --module-background: rgba(0, 0, 0, .8);
+    --theme-red: #ff5554;
+    --theme-blue: #03a9f4;
+  }
+  
     .navbar {
         color: white;
         width: 100%;
