@@ -9,6 +9,7 @@
     data() {
       const events =  [
         { day: 1, t1: 16, t2: 19 },
+        { day: 1, t1: 19, t2: 20 },
         { day: 1, t1: 18, t2: 20 },
         { day: 1, t1: 21, t2: 23 },
         { day: 3, t1: 17, t2: 18 },
@@ -20,6 +21,12 @@
         { day: 5, t1: 20, t2: 21 },
         { day: 5, t1: 21, t2: 23 },
       ];
+      
+      events.sort((a, b) => {
+        if (a.t1 > b.t1) return 1;
+        if (a.t1 === b.t1 && a.t2 > b.t2) return 1;
+        else return -1;
+      });
 
       const eventGroups = [];
 
@@ -36,7 +43,6 @@
 
             if (range1 || range2 || event.t1 === secondEvent.t1 || event.t2 === secondEvent.t2) {
               if (secondEvent.eventGroup !== undefined) {
-                console.log(3)
                 event.eventGroup = secondEvent.eventGroup;
                 eventGroups[secondEvent.eventGroup].push(event);
               } else {
