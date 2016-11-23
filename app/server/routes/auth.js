@@ -54,11 +54,11 @@ router.post('/register', async function(req, res) {
 
 router.post('/login', async function(req, res, next) {
     const validation = Validator(req.body, {
-        username: 'required|between:3,20',
+        username: 'required|username_exists|between:3,20',
         password: 'required|min:5',
     });
 
-    if (validation.fails()) {
+    if (await validation.promise.fails()) {
         res.json({
             errors: validation.errors(),
         });
