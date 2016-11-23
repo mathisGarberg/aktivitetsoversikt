@@ -60,6 +60,10 @@
 
       return { eventGroups };
     },
+    
+    ready() {
+      console.log('hi');
+    }
   };
 </script>
 
@@ -93,32 +97,29 @@
   .calender-content {
     --timeblock-height: 4rem;
 
-    height: 50vh;
     overflow-y: auto;
     background: var(--module-background);
-    color: white;
     display: flex;
 
     & .timestamps {
-      padding: 1em 0;
+      padding: 1rem 0;
       height: calc(var(--timeblock-height) * 24);
       flex: none;
-      width: 4em;
+      width: 4rem;
 
       & time {
         box-sizing: border-box;
         display: block;
-        padding: .25em .5em;
+        padding: .25rem .5rem;
         height: var(--timeblock-height);
       }
     }
 
     & .grid {
-      padding: 1em .5em;
+      padding: 1rem .5rem;
       flex: auto;
       display: flex;
       height: calc(var(--timeblock-height) * 24);
-      background: var(--module-background);
 
       & .grid-column {
         flex: 1 1 0;
@@ -131,7 +132,7 @@
           width: 100%;
           height: 100%;
           box-sizing: border-box;
-          padding: 0 .25em;
+          padding: 0 .25rem;
           display: flex;
           height: 100%;
 
@@ -141,8 +142,8 @@
             flex-direction: column;
             box-sizing: border-box;
             border: 1px solid black;
-            padding: .25em;
-            border-radius: .25em;
+            padding: .25rem;
+            border-radius: .25rem;
             background: var(--theme-blue);
 
             &:not(:only-child) .description {
