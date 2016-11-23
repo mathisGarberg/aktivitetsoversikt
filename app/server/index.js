@@ -6,8 +6,9 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 
-import database from './middleware/database';
+import databaseMiddleware from './middleware/database';
 import passportMiddleware from './middleware/passport';
+import validatorMiddleware from './middleware/validator';
 
 import routes from './routes';
 
@@ -17,7 +18,8 @@ app.use('/public', express.static(path.join(__dirname, '/../../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(database);
+app.use(databaseMiddleware);
+app.use(validatorMiddleware);
 app.use(routes);
 app.use(passport.initialize());
 app.use(passport.session());
