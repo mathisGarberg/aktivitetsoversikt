@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+import 'dom-shims';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueRessource from 'vue-resource'
