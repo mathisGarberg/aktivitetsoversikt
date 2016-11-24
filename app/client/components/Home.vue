@@ -1,6 +1,6 @@
 <script>
-  import CalenderNavigation from './calender/Calender-navigation.vue';
-  import CalenderContent from './calender/Calender-content.vue';
+  import CalenderNavigation from './calender/CalenderNavigation.vue';
+  import CalenderContent from './calender/CalenderContent.vue';
   
     export default {
       components: {
@@ -12,8 +12,8 @@
 
 <template>
     <div class="calender-view">
-        <Calender-navigation></Calender-navigation>
-        <Calender-content></Calender-content>
+        <calender-navigation></calender-navigation>
+        <calender-content></calender-content>
     </div>
 </template>
 
@@ -27,6 +27,8 @@
     flex-direction: column;
     color: white;
     padding: 4rem;
+    box-sizing: border-box;
+    max-height: 100%;
     
     & .calender-navigation {
       margin-bottom: 1rem;
