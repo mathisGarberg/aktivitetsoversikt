@@ -1,24 +1,24 @@
 <script>
-  import CalenderNavigation from './calender/CalenderNavigation.vue';
-  import CalenderContent from './calender/CalenderContent.vue';
+  import CalendarNavigation from './calendar/CalendarNavigation.vue';
+  import CalendarContent from './calendar/CalendarContent.vue';
   
     export default {
       components: {
-        CalenderNavigation,
-        CalenderContent,
+        CalendarNavigation,
+        CalendarContent,
       }
     };
 </script>
 
 <template>
-    <div class="calender-view">
-        <calender-navigation></calender-navigation>
-        <calender-content></calender-content>
+    <div class="calendar-view">
+        <calendar-navigation></calendar-navigation>
+        <calendar-content></calendar-content>
     </div>
 </template>
 
 <style lang="sass">
-  .calender-view {
+  .calendar-view {
     background-image: url('/public/img/fotball-background.jpg');
     background-size: cover;
     background-position: center;
@@ -30,12 +30,12 @@
     box-sizing: border-box;
     max-height: 100%;
     
-    & .calender-navigation {
+    & .calendar-navigation {
       margin-bottom: 1rem;
       flex: none;
     }
     
-    & .calender-content {
+    & .calendar-content {
       flex: auto;
     }
   }

@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="calender-navigation">
+  <div class="calendar-navigation">
     <div class="grid">
       <div class="grid-column past">
         <div class="day">Mandag</div>
@@ -40,7 +40,7 @@
 </template>
 
 <style lang="sass">
-  .calender-navigation {
+  .calendar-navigation {
     & .grid {
       padding: 0 .5rem;
       margin-left: 4rem;

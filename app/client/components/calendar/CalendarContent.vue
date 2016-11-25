@@ -1,58 +1,26 @@
 <script>
-  import lodash from 'lodash';
-
-  const events =  [
-    { day: 1, t1: 16, t2: 19 },
-    { day: 1, t1: 19, t2: 20 },
-    { day: 1, t1: 18, t2: 20 },
-    { day: 1, t1: 21.25, t2: 23 },
-    { day: 3, t1: 17, t2: 18 },
-    { day: 3, t1: 20, t2: 24 },
-    { day: 3, t1: 21, t2: 23 },
-    { day: 1, t1: 16, t2: 18 },
-    { day: 4, t1: 16, t2: 19 },
-    { day: 2, t1: 15, t2: 19 },
-    { day: 5, t1: 20, t2: 21 },
-    { day: 5, t1: 21, t2: 23 },
-  ];
-
-  events.sort((a, b) => {
-    if (a.t1 > b.t1) return 1;
-    if (a.t1 === b.t1 && a.t2 > b.t2) return 1;
-    else return -1;
-  });
-
-  const eventGroups = [];
-
-  events.forEach((event, index) => {
-    const styles = [
-      `margin-top: calc(var(--timeblock-height) * (${ event.t1 }))`,
-      `height: calc(var(--timeblock-height) * ${ event.t2 - event.t1 })`,
-    ];
-
-    events.forEach((secondEvent, secondIndex) => {
-      if (event !== secondEvent && event.day === secondEvent.day && event.eventGroup === undefined) {
-        const range1 = _.inRange(event.t1, secondEvent.t1, secondEvent.t2);
-        const range2 = _.inRange(event.t2, secondEvent.t1, secondEvent.t2);
-
-        if (range1 || range2 || event.t1 === secondEvent.t1 || event.t2 === secondEvent.t2) {
-          if (secondEvent.eventGroup !== undefined) {
-            event.eventGroup = secondEvent.eventGroup;
-            eventGroups[secondEvent.eventGroup].push(event);
-          } else {
-            event.eventGroup = eventGroups.push([event]) - 1;
-          }
-        }
-      }
-    });
-
-    if (event.eventGroup === undefined)
-      event.eventGroup = eventGroups.push([event]) - 1;
-
-    event.styles = styles.join(';');
-  });
+  import _ from 'lodash';
 
   export default {
+    data() {
+      return {
+        events: [
+          { day: 1, t1: 16, t2: 19 },
+          { day: 1, t1: 19, t2: 20 },
+          { day: 1, t1: 18, t2: 20 },
+          { day: 1, t1: 21.25, t2: 23 },
+          { day: 3, t1: 17, t2: 18 },
+          { day: 3, t1: 20, t2: 24 },
+          { day: 3, t1: 21, t2: 23 },
+          { day: 1, t1: 16, t2: 18 },
+          { day: 4, t1: 16, t2: 19 },
+          { day: 2, t1: 15, t2: 19 },
+          { day: 5, t1: 20, t2: 21 },
+          { day: 5, t1: 21, t2: 23 },
+        ],
+      };
+    },
+
     filters: {
       pad(n) { return n > 9 ? n : `0${n}` },
       numToTime(n) {
@@ -63,8 +31,49 @@
       },
     },
 
-    data() {
-      return { eventGroups };
+    computed: {
+      groups() {
+        // Create a copy of the events array
+        const events = this.events.slice(0);
+
+        events.sort((a, b) => {
+          if (a.t1 > b.t1) return 1;
+          if (a.t1 === b.t1 && a.t2 > b.t2) return 1;
+          else return -1;
+        });
+
+        const eventGroups = [];
+
+        events.forEach((event, index) => {
+          const styles = [
+            `margin-top: calc(var(--timeblock-height) * (${ event.t1 }))`,
+            `height: calc(var(--timeblock-height) * ${ event.t2 - event.t1 })`,
+          ];
+
+          events.forEach((secondEvent, secondIndex) => {
+            if (event !== secondEvent && event.day === secondEvent.day && event.eventGroup === undefined) {
+              const range1 = _.inRange(event.t1, secondEvent.t1, secondEvent.t2);
+              const range2 = _.inRange(event.t2, secondEvent.t1, secondEvent.t2);
+
+              if (range1 || range2 || event.t1 === secondEvent.t1 || event.t2 === secondEvent.t2) {
+                if (secondEvent.eventGroup !== undefined) {
+                  event.eventGroup = secondEvent.eventGroup;
+                  eventGroups[secondEvent.eventGroup].push(event);
+                } else {
+                  event.eventGroup = eventGroups.push([event]) - 1;
+                }
+              }
+            }
+          });
+
+          if (event.eventGroup === undefined)
+            event.eventGroup = eventGroups.push([event]) - 1;
+
+          event.styles = styles.join(';');
+        });
+
+        return eventGroups;
+      },
     },
 
     ready() {
@@ -74,7 +83,7 @@
 </script>
 
 <template>
-  <div class="calender-content">
+  <div class="calendar-content">
     <div class="timestamps">
       <time v-for="n in 24">
         {{ n - 1 | pad }}:00
@@ -84,7 +93,7 @@
       <div class="grid-column"
            v-for="n in 7">
         <div class="event-group"
-             v-for="group in eventGroups"
+             v-for="group in groups"
              v-if="group[0].day === n">
           <div class="event"
                v-for="event in group"
@@ -100,7 +109,7 @@
 </template>
 
 <style lang="sass">
-  .calender-content {
+  .calendar-content {
     --timeblock-height: 4rem;
 
     overflow-y: scroll;
