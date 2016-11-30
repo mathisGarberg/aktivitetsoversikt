@@ -33,7 +33,7 @@
           name: dayName,
           date: formattedDate,
           today: formattedDate === formattedNowDate,
-          past: (new Date()) > date,
+          past: (new Date()) > date && formattedDate !== formattedNowDate,
         });
       }
     },
