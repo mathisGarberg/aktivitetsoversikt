@@ -2,12 +2,12 @@
   import CalendarNavigation from './calendar/CalendarNavigation.vue';
   import CalendarContent from './calendar/CalendarContent.vue';
   
-    export default {
-      components: {
-        CalendarNavigation,
-        CalendarContent,
-      }
-    };
+  export default {
+    components: {
+      CalendarNavigation,
+      CalendarContent,
+    }
+  };
 </script>
 
 <template>

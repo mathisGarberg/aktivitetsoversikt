@@ -1,5 +1,5 @@
 INSERT INTO role(name) VALUES('Spiller');
-INSERT INTO role(name) VALUES('Trenger');
+INSERT INTO role(name) VALUES('Trener');
 INSERT INTO role(name) VALUES('Lagleder');
 INSERT INTO role(name) VALUES('Foresatt');
 INSERT INTO role(name) VALUES('Admin');

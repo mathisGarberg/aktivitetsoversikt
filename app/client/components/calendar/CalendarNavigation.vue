@@ -1,39 +1,51 @@
 <script>
-  export default {
+  import moment from 'moment';
 
+  export default {
+    data() {
+      return {
+        days: [],
+      };
+    },
+
+    mounted() {
+      const startOfWeek = moment().startOf('week').toDate();
+      const endOfWeek = moment().endOf('week').toDate();
+
+      const dayNames = [
+        'Mandag',
+        'Tirsdag',
+        'Onsdag',
+        'Torsdag',
+        'Fredag',
+        'Lørdag',
+        'Søndag'
+      ];
+
+      for (let dayIndex of [0, 1, 2, 3, 4, 5, 6]) {
+        const dayName = dayNames[dayIndex];
+        const date = moment(startOfWeek).add(dayIndex, 'days').toDate();
+
+        const formattedDate = moment(date).format('D.M');
+        const formattedNowDate = moment().format('D.M');
+
+        this.days.push({
+          name: dayName,
+          date: formattedDate,
+          today: formattedDate === formattedNowDate,
+          past: (new Date()) > date,
+        });
+      }
+    },
   };
 </script>
 
 <template>
   <div class="calendar-navigation">
     <div class="grid">
-      <div class="grid-column past">
-        <div class="day">Mandag</div>
-        <div class="date">21.11</div>
-      </div>
-      <div class="grid-column past">
-        <div class="day">Tirsdag</div>
-        <div class="date">22.11</div>
-      </div>
-      <div class="grid-column today">
-        <div class="day">Onsdag</div>
-        <div class="date">23.11</div>
-      </div>
-      <div class="grid-column">
-        <div class="day">Torsdag</div>
-        <div class="date">24.11</div>
-      </div>
-      <div class="grid-column">
-        <div class="day">Fredag</div>
-        <div class="date">25.11</div>
-      </div>
-      <div class="grid-column">
-        <div class="day">Lørdag</div>
-        <div class="date">26.11</div>
-      </div>
-      <div class="grid-column">
-        <div class="day">Søndag</div>
-        <div class="date">27.11</div>
+      <div v-for="day in days" :class="{ 'grid-column': true, 'today': day.today, 'past': day.past }">
+        <div class="day">{{ day.name }}</div>
+        <div class="date">{{ day.date }}</div>
       </div>
     </div>
   </div>

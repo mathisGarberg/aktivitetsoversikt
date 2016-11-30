@@ -1,6 +1,10 @@
 <script>
   import _ from 'lodash';
 
+  function pad(n) {
+    return n > 9 ? n : `0${n}`;
+  }
+
   export default {
     data() {
       return {
@@ -22,11 +26,10 @@
     },
 
     filters: {
-      pad(n) { return n > 9 ? n : `0${n}` },
+      pad(n) { return pad(n); },
       numToTime(n) {
         const h = Math.floor(n);
         const m = (n - h) * 60;
-        const pad = n => n > 9 ? n : `0${n}`;
         return `${pad(h)}:${pad(m)}`;
       },
     },
@@ -76,7 +79,7 @@
       },
     },
 
-    ready() {
+    mounted() {
       console.log('hi');
     }
   };

@@ -14,3 +14,12 @@ CREATE TABLE role(
     PRIMARY KEY(id),
     UNIQUE(name)
 );
+
+CREATE TABLE event(
+    id INTEGER AUTO_INCREMENT,
+    t1 TIMESTAMP NOT NULL,
+    t2 TIMESTAMP NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    event_date DATETIME NOT NULL,
+    PRIMARY KEY(id)
+);

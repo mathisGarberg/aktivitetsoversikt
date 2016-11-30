@@ -1,6 +1,8 @@
 import 'babel-polyfill';
 import 'dom-shims';
 
+import moment from 'moment';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueRessource from 'vue-resource'
@@ -11,6 +13,8 @@ import App from './components/App.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueRessource);
+
+moment.locale('nb');
 
 const router = new VueRouter({
     mode: 'history',

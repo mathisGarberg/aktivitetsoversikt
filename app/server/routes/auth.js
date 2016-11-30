@@ -19,7 +19,7 @@ function login(req, res, next) {
     })(req, res, next);
 }
 
-router.post('/register', async function(req, res) {
+router.post('/register', async function(req, res, next) {
     const validation = Validator(req.body, {
         full_name: 'required|between:5,20',
         username: 'required|username_available|between:3,20',
