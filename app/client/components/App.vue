@@ -1,5 +1,10 @@
 <script>
+  import CalendarFilters from './calendar/CalendarFilters.vue';
+  
   export default {
+    components: {
+      CalendarFilters,
+    }
   };
 </script>
 
@@ -13,7 +18,7 @@
     </nav>
     <div class="content">
       <nav class="sidenav">
-        <ul>
+        <ul class="main-nav">
           <li>
             <a class="material-icons" href="/">filter_list</a>
           </li>
@@ -33,6 +38,7 @@
             <a class="material-icons" href="/">info</a>
           </li>
         </ul>
+        <calendar-filters></calendar-filters>
       </nav>
       <main>
         <router-view></router-view>
@@ -64,7 +70,7 @@
         background: #1f1f1f;
         display: flex;
 
-        & ul {
+        & .main-nav {
           margin: 0;
           padding: 0;
           list-style: none;
@@ -103,6 +109,10 @@
               text-decoration: none;
             }
           }
+        }
+        
+        & .filters {
+          flex: auto;
         }
       }
 
