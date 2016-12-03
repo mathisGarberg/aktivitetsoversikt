@@ -36,13 +36,20 @@
           past: (new Date()) > date && formattedDate !== formattedNowDate,
         });
       }
+      
+      const dayGridEl = this.$refs.daysGrid;
+      
+      dayGridEl.style.overflowY = 'scroll';
+      const nativeScrollbarWidth = dayGridEl.offsetWidth - dayGridEl.scrollWidth;
+      dayGridEl.style.marginRight = `${nativeScrollbarWidth}px`;
+      dayGridEl.style.overflowY = null;
     },
   };
 </script>
 
 <template>
   <div class="calendar-navigation">
-    <div class="grid">
+    <div ref="daysGrid" class="grid">
       <div v-for="day in days" :class="{ 'grid-column': true, 'today': day.today, 'past': day.past }">
         <div class="day">{{ day.name }}</div>
         <div class="date">{{ day.date }}</div>
@@ -57,7 +64,6 @@
       padding: 0 .5rem;
       margin-left: 4rem;
       display: flex;
-      overflow-y: scroll;
 
       & .grid-column {
         flex: 1 1 0;
