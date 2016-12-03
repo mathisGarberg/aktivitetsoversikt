@@ -1,10 +1,22 @@
 <script>
   import CalendarFilters from './calendar/CalendarFilters.vue';
-  
+  import DialogOverlay from './misc/DialogOverlay.vue';
+  import Login from './auth/Login.vue';
+
   export default {
     components: {
       CalendarFilters,
-    }
+      DialogOverlay,
+      Login,
+    },
+
+    methods: {
+      loginDialog() {
+        // Create a dialog overlay
+        // Append Login content and add slot="content"
+      },
+    },
+
   };
 </script>
 
@@ -13,7 +25,7 @@
     <nav class="navbar">
       <h1 class="navbar-brand">Heddal IL</h1>
       <div class="navbar-right">
-        <div>Kjetil Røise (Trener)</div>
+        <button v-on:click="loginDialog">LOGG INN</button>
       </div>
     </nav>
     <div class="content">
@@ -44,6 +56,7 @@
         <router-view></router-view>
       </main>
     </div>
+    <div ref="dialogOverlay"></div>
   </div>
 </template>
 
@@ -58,7 +71,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-              color: white;
+    color: white;
 
     & .content {
       display: flex;
@@ -85,14 +98,14 @@
             margin: 0;
             border: 0 solid #1f1f1f;
             border-width: 2px 0;
-            
+
             &:first-child { border-top: none }
             &:nth-last-child(2) { border-bottom-width: 4px }
             &:last-child { 
               margin-top: auto;
               border: none;
             }
-            
+
             &.active {
               color: var(--theme-red);
               background: #1f1f1f;
@@ -110,7 +123,7 @@
             }
           }
         }
-        
+
         & .filters {
           flex: auto;
         }
