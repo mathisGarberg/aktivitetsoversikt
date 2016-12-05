@@ -36,9 +36,9 @@
           past: (new Date()) > date && formattedDate !== formattedNowDate,
         });
       }
-      
+
       const dayGridEl = this.$refs.daysGrid;
-      
+
       dayGridEl.style.overflowY = 'scroll';
       const nativeScrollbarWidth = dayGridEl.offsetWidth - dayGridEl.scrollWidth;
       dayGridEl.style.marginRight = `${nativeScrollbarWidth}px`;
@@ -49,6 +49,18 @@
 
 <template>
   <div class="calendar-navigation">
+    <div class="week-details">
+      <button>
+        <i class="material-icons">chevron_left</i>
+      </button>
+      <div class="text">
+        <span>October, 2016</span>
+        <h2>Uke 41</h2>
+      </div>
+      <button>
+        <i class="material-icons">chevron_right</i>
+      </button>
+    </div>
     <div ref="daysGrid" class="grid">
       <div v-for="day in days" :class="{ 'grid-column': true, 'today': day.today, 'past': day.past }">
         <div class="day">{{ day.name }}</div>
@@ -60,8 +72,40 @@
 
 <style lang="sass">
   .calendar-navigation {
+    & .week-details {
+      display: flex;
+      margin-bottom: 1rem;
+      
+      & button {
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        color: inherit;
+        padding: 0;
+        background: none;
+        border: none;
+        
+        & .material-icons {
+          font-size: 4rem;
+        }
+      }
+      
+      & .text {
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        & h2 {
+          font-size: 4rem;
+          margin: 0;
+        }
+      }
+    }
+    
     & .grid {
-      padding: 0 .5rem;
       margin-left: 4rem;
       display: flex;
 
@@ -72,17 +116,17 @@
         padding: .25rem;
         background: var(--module-background);
         border-radius: .25rem;
-        
+
         &.past { color: rgba(255, 255, 255, .5) }
         &.today { color: var(--theme-red) }
-        
+
         & .day {
           text-transform: uppercase;
           font-size: 1.2rem;
           font-weight: 600;
           margin-top: .5rem;
         }
-        
+
         & .date {
           margin: .5rem 0;
           font-size: 2rem;
