@@ -1,10 +1,5 @@
 <script>
   export default {
-    methods: {
-      close(e) {
-
-      },
-    }
   }
 </script>
 
