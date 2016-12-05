@@ -1,9 +1,42 @@
 <script>
-  export default {
+  import Cookies from 'js-cookie';
 
+  export default {
+    data() {
+      return {
+        sport: [
+          {
+            name: "Fotball",
+            checked: true,
+          },
+          {
+            name: "Langrenn",
+            checked: false,
+          },
+          {
+            name: "Skihopp",
+            checked: false,
+          },
+          {
+            name: "Skiskyting",
+            checked: false,
+          },
+        ],
+        lag: [
+          {
+            type: 'gutter',
+            name: 'G13 Fotball',
+            checked: false, 
+          },
+        ],
+      };
+    },
+
+    mounted() {
+      
+    },
   }
 </script>
-
 
 <template>
   <div class="filters">
