@@ -10,11 +10,14 @@
       Login,
     },
 
+    data() {
+      return {
+        showLoginDialog: false,
+      };
+    },
+
     methods: {
-      loginDialog() {
-        // Create a dialog overlay
-        // Append Login content and add slot="content"
-      },
+
     },
 
   };
@@ -25,29 +28,29 @@
     <nav class="navbar">
       <h1 class="navbar-brand">Heddal IL</h1>
       <div class="navbar-right">
-        <button v-on:click="loginDialog">LOGG INN</button>
+        <button @click="showLoginDialog = true">LOGG INN</button>
       </div>
     </nav>
     <div class="content">
       <nav class="sidenav">
         <ul class="main-nav">
           <li>
-            <a class="material-icons" href="/">filter_list</a>
+            <router-link class="material-icons" to="/">filter_list</router-link>
           </li>
           <li>
-            <a class="material-icons" href="/">rss_feed</a>
+            <router-link class="material-icons" to="/">rss_feed</router-link>
           </li>
           <li class="active">
-            <a class="material-icons" href="/">today</a>
+            <router-link class="material-icons" to="/">today</router-link>
           </li>
           <li>
-            <a class="material-icons" href="/">contacts</a>
+            <router-link class="material-icons" to="/">contacts</router-link>
           </li>
           <li>
-            <a class="material-icons" href="/">people</a>
+            <router-link class="material-icons" to="/">people</router-link>
           </li>
           <li>
-            <a class="material-icons" href="/">info</a>
+            <router-link class="material-icons" to="/">info</router-link>
           </li>
         </ul>
         <calendar-filters></calendar-filters>
@@ -56,7 +59,10 @@
         <router-view></router-view>
       </main>
     </div>
-    <div ref="dialogOverlay"></div>
+    <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
+      <h3 slot="title">Login</h3>
+      <div slot= "content">TODO: Implement login form</div>
+    </dialog-overlay>
   </div>
 </template>
 

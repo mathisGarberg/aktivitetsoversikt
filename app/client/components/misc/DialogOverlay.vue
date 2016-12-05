@@ -1,6 +1,10 @@
 <script>
   export default {
+    methods: {
+      close(e) {
 
+      },
+    }
   }
 </script>
 
@@ -11,7 +15,7 @@
         <h3>
           <slot name="title"></slot>
         </h3>
-        <button class="close">
+        <button class="close" @click="$emit('close')">
           <i class="material-icons">close</i>
         </button>
       </div>
