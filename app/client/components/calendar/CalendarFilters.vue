@@ -79,21 +79,16 @@
 
 <style lang="sass">
   .filters {
-    display: flex;
-    flex-direction: column;
+    overflow: auto;
     padding: 0 1rem;
 
     & h2 {
-      flex: none;
       font-size: 1.5rem;
       line-height: calc(4 / 1.5);
       margin: 0;
     }
 
     & details {
-      overflow: hidden;
-      flex: 0 1 auto;
-      display: flex;
 
       &:nth-of-type(n+2) {
         margin-top: 1rem;

@@ -81,7 +81,13 @@
       }
 
       & .content {
-        flex: auto;
+        padding: 1rem;
+        overflow-y: auto;
+        display: flex;
+        
+        & > div {
+          flex: auto;
+        }
       }
     }
   }

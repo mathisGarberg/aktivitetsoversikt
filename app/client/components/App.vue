@@ -62,7 +62,9 @@
     </div>
     <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
       <h3 slot="title">Login</h3>
-      <div slot= "content">TODO: Implement login form</div>
+      <div slot= "content">
+        <login></login>
+      </div>
     </dialog-overlay>
     <dialog-overlay v-if="showInfoDialog" @close="showInfoDialog = false">
       <h3 slot="title">Informasjon</h3>
@@ -122,10 +124,6 @@
               background: #1f1f1f;
             }
 
-            &:not(.active):hover {
-              background: #444;
-            }
-
             & .material-icons {
               display: block;
               width: 4rem;
@@ -173,7 +171,7 @@
         flex-direction: column;
         justify-content: center;
         font-size: 20px;
-
+        
         & button {
           border: none;
           background: rgba(0, 0, 0, 0.2);
