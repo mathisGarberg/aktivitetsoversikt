@@ -59,7 +59,6 @@
     "source-map-support": "^0.4.6",
     "validatorjs": "^3.9.0",
     "vue": "^2.0.3",
-    "vue-async-data": "^1.0.2",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.1"
   }

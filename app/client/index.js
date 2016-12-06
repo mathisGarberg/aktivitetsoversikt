@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueRessource from 'vue-resource'
+import VueRessource from 'vue-resource';
 
 import routes from './routes';
 

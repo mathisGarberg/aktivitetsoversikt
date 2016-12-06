@@ -20,10 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(databaseMiddleware);
 app.use(validatorMiddleware);
-app.use(routes);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passportMiddleware);
+app.use(routes);
 app.use(function(err, req, res, next) {
     const status = err.status || 500;
     const message = err.toString();

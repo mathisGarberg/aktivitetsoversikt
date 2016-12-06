@@ -4,36 +4,35 @@
   export default {
     data() {
       return {
-        sport: [
-          {
-            name: "Fotball",
-            checked: true,
-          },
-          {
-            name: "Langrenn",
-            checked: false,
-          },
-          {
-            name: "Skihopp",
-            checked: false,
-          },
-          {
-            name: "Skiskyting",
-            checked: false,
-          },
-        ],
-        lag: [
-          {
-            type: 'gutter',
-            name: 'G13 Fotball',
-            checked: false, 
-          },
-        ],
+        categories: [],
+        maleTeams: [],
+        femaleTeams: [],
       };
     },
 
+    methods: {
+      async fetchData() {
+        const categories = await this.$http.get('/event/category');
+        const maleTeams = await this.$http.get('/event/team/male');
+        const femaleTeams = await this.$http.get('/event/team/female');
+
+        function checkify(item, index) {
+          item.checked = index === 0;
+          return item;
+        }
+
+        this.categories = categories.data.map(checkify);
+        this.maleTeams = maleTeams.data.map(checkify);
+        this.femaleTeams = femaleTeams.data.map(checkify);
+      },
+    },
+
     mounted() {
-      
+      this.fetchData();
+    },
+
+    watch: {
+      '$route': 'fetchData',
     },
   }
 </script>
@@ -44,28 +43,10 @@
     <details open>
       <summary>SPORT</summary>
       <ul>
-        <li>
+        <li v-for="category in categories">
           <label>
-            <input type="checkbox" checked>
-            <p>Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>Langrenn</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>Skihopp</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>Skiskyting</p>
+            <input type="checkbox" :checked="category.checked">
+            <p>{{ category.name }}</p>
           </label>
         </li>
       </ul>
@@ -73,40 +54,10 @@
     <details>
       <summary>LAG - GUTTER</summary>
       <ul>
-        <li>
+        <li v-for="maleTeam in maleTeams">
           <label>
-            <input type="checkbox" checked>
-            <p>G13 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>G13 Langrenn</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>G14 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>G14 Langrenn</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>G15 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>G15 Langrenn</p>
+            <input type="checkbox" :checked="maleTeam.checked">
+            <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
           </label>
         </li>
       </ul>
@@ -114,40 +65,10 @@
     <details open>
       <summary>LAG - JENTER</summary>
       <ul>
-        <li>
+        <li v-for="femaleTeam in femaleTeams">
           <label>
-            <input type="checkbox">
-            <p>J13 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>J13 Langrenn</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>J14 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>J14 Langrenn</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" checked>
-            <p>J15 Fotball</p>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox">
-            <p>J15 Langrenn</p>
+            <input type="checkbox" :checked="femaleTeam.checked">
+            <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
           </label>
         </li>
       </ul>

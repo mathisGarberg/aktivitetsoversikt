@@ -1,14 +1,17 @@
-INSERT INTO role(name) VALUES(1, 'Spiller');
-INSERT INTO role(name) VALUES(2, 'Trener');
-INSERT INTO role(name) VALUES(3, 'Lagleder');
-INSERT INTO role(name) VALUES(4, 'Foresatt');
-INSERT INTO role(name) VALUES(5, 'Admin');
+INSERT INTO role(id, name) VALUES(1, 'Spiller');
+INSERT INTO role(id, name) VALUES(2, 'Trener');
+INSERT INTO role(id, name) VALUES(3, 'Lagleder');
+INSERT INTO role(id, name) VALUES(4, 'Foresatt');
+INSERT INTO role(id, name) VALUES(5, 'Admin');
 
-INSERT INTO user(role_id, username, password, full_name) VALUES(
+INSERT INTO user(role_id, username, password, first_name, last_name, email, phone) VALUES(
     5,
     'admin',
     '$2a$10$4QUo.HfqKAqsbD/YW6Ashu1vg.P25je3RyI/YZx9CQoWJqnOrvKM6',
-    'Administrator'
+    'Toni',
+    'Sucic',
+    'toni.sucic@icloud.com',
+    '+47 473 67 361'
 );
 
 INSERT INTO category(name) VALUES('Fotball');

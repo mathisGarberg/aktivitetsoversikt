@@ -32,9 +32,8 @@ CREATE TABLE team(
     category_id INTEGER NOT NULL,
     gender CHAR(1) NOT NULL,
     year CHAR(2) NOT NULL,
-    PRIMARY KEY(id) NOT NULL,
-    FOREIGN KEY(category_id) REFERENCES category(id),
-    UNIQUE(name)
+    PRIMARY KEY(id),
+    FOREIGN KEY(category_id) REFERENCES category(id)
 );
 
 /* Aktiviteter som vises i kalenderen */
@@ -53,6 +52,5 @@ CREATE TABLE facility(
     id INTEGER NOT NULL AUTO_INCREMENT,
     field_name VARCHAR(50) NOT NULL,
     responsible VARCHAR(50) NOT NULL,
-    PRIMARY KEY(id),
-    FOREIGN KEY(leader_id) REFERENCES leader(id)
+    PRIMARY KEY(id)
 );

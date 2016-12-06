@@ -4,7 +4,7 @@ import path from 'path';
 import mysql from 'promise-mysql';
 
 import user from '../database/user';
-import event from '../database/event';
+import filter from '../database/filter';
 
 /**
  * [Database middleware]
@@ -64,7 +64,7 @@ export default async (req, res, next) => {
 
         req.db = {
             user: user(conn),
-            event: event(conn),
+            filter: filter(conn),
         };
 
         next();
