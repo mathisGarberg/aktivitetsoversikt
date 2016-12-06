@@ -13,6 +13,7 @@
     data() {
       return {
         showLoginDialog: false,
+        showInfoDialog: false,
       };
     },
 
@@ -50,7 +51,7 @@
             <router-link class="material-icons" to="/">people</router-link>
           </li>
           <li>
-            <router-link class="material-icons" to="/">info</router-link>
+            <i @click="showInfoDialog = true" class="material-icons">info</i>
           </li>
         </ul>
         <calendar-filters></calendar-filters>
@@ -62,6 +63,10 @@
     <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
       <h3 slot="title">Login</h3>
       <div slot= "content">TODO: Implement login form</div>
+    </dialog-overlay>
+    <dialog-overlay v-if="showInfoDialog" @close="showInfoDialog = false">
+      <h3 slot="title">Informasjon</h3>
+      <div slot= "content">Mathis kan skrive noe her elns.</div>
     </dialog-overlay>
   </div>
 </template>
@@ -117,7 +122,11 @@
               background: #1f1f1f;
             }
 
-            & a {
+            &:not(.active):hover {
+              background: #444;
+            }
+
+            & .material-icons {
               display: block;
               width: 4rem;
               height: 4rem;
@@ -164,6 +173,14 @@
         flex-direction: column;
         justify-content: center;
         font-size: 20px;
+
+        & button {
+          border: none;
+          background: rgba(0, 0, 0, 0.2);
+          padding: .5rem;
+          color: inherit;
+          font-size: 1rem;
+        }
       }
     }
   }

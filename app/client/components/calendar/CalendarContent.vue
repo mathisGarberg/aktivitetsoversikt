@@ -1,13 +1,19 @@
 <script>
   import _ from 'lodash';
+  import DialogOverlay from './../misc/DialogOverlay.vue';
 
   function pad(n) {
     return n > 9 ? n : `0${n}`;
   }
 
   export default {
+    components: {
+      DialogOverlay,
+    },
+    
     data() {
       return {
+        showEventDialog: false,
         events: [
           { day: 1, t1: 16, t2: 19 },
           { day: 1, t1: 19, t2: 20 },
@@ -80,7 +86,14 @@
     },
 
     mounted() {
-      console.log('hi');
+      // Can this be implemented with some fancy vue magic?
+      let earlestEvent = 24;
+      document.querySelectorAll('.event').forEach((el) => {
+        if (el.dataset.start < earlestEvent) {
+          earlestEvent = el.dataset.start;
+          document.querySelector('.calendar-content').scrollTop = el.offsetTop;
+        }
+      });
     }
   };
 </script>
@@ -95,32 +108,37 @@
     <div class="grid">
       <div class="grid-column"
            v-for="n in 7">
-        <div class="event-group"
-             v-for="group in groups"
-             v-if="group[0].day === n">
-          <div class="event"
-               v-for="event in group"
-               :style="event.styles">
+        <div v-for="group in groups"
+             v-if="group[0].day === n"
+             :class="{ 'event-group': true, 'large-block': group.length > 2 }">
+          <div v-for="event in group"
+               @click="showEventDialog = true"
+               :style="event.styles"
+               :data-start="event.t1"
+               class="event">
             <time>{{ event.t1 | numToTime }}</time>
-            <p class="description">desc.</p>
+            <p class="description">A common need for data binding is manipulating an element’s class list and its inline styles. Since they are both attributes, we can use v-bind to handle them: we just need to calculate a final string with our expressions. However, meddling with string concatenation is annoying and error-prone. For this reason, Vue provides special enhancements when v-bind is used with class and style. In addition to strings, the expressions can also evaluate to objects or arrays.</p>
             <time>{{ event.t2 | numToTime }}</time>
           </div>
         </div>
       </div>
     </div>
+    <dialog-overlay v-if="showEventDialog" @close="showEventDialog = false">
+      <h3 slot="title">Event</h3>
+      <div slot= "content">TODO: Add event details</div>
+    </dialog-overlay>
   </div>
 </template>
 
 <style lang="sass">
   .calendar-content {
-    --timeblock-height: 4rem;
+    --timeblock-height: 5rem;
 
     overflow-y: scroll;
     background: var(--module-background);
     display: flex;
 
     & .timestamps {
-      padding: 1rem 0;
       height: calc(var(--timeblock-height) * 24);
       flex: none;
       width: 4rem;
@@ -134,7 +152,6 @@
     }
 
     & .grid {
-      padding: 1rem .5rem;
       flex: auto;
       display: flex;
       height: calc(var(--timeblock-height) * 24);
@@ -155,27 +172,45 @@
           padding: 0 .25rem;
           display: flex;
           height: 100%;
+          pointer-events: none;
 
           & .event {
+            pointer-events: all;
             flex: 1 1 0;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            border: 1px solid black;
+            border: 1px solid transparent;
             padding: .25rem;
-            border-radius: .25rem;
+            border-radius: calc(.25rem + 1px);
             background: var(--theme-blue);
+            background-clip: padding-box;
+            cursor: default;
+            
+            &:hover {
+              filter: brightness(1.2);
+            }
 
             &:not(:only-child) {
               & .description { display: none }
             }
 
             & .description {
-              margin: 0;
+              margin: .5rem 0;
+              color: rgba(255, 255, 255, .75);
+              flex: auto;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
 
             & :last-child {
               margin-top: auto;
+            }
+          }
+          
+          &.large-block .event {
+            & time {
+              display: none;
             }
           }
         }
