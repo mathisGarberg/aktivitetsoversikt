@@ -27,8 +27,17 @@ export default function(conn) {
                 JOIN category ON category.id = team.category_id AND team.gender = 'J'`);
         },
 
-        async findFilteredEvents() {
-            // TODO: implementere dette etter å ha implementert CalendarFilters.vue
+        async findFilteredEvents(startDate, endDate, teamIds) {
+            const listOfQuestionmarks = teamIds.map((id, index) => index === teamIds.length - 1 ? '?' : '?,');
+
+            return await conn.query(`
+                SELECT event.*, team.id AS team_id FROM event
+                JOIN team
+                    ON event.team_id = team.id
+                    AND event.t1 > ?
+                    AND event.t1 < ?
+                    AND team.id IN (${listOfQuestionmarks})
+            `);
         },
 
         async addEvent(team_id, t1, t2, description) {

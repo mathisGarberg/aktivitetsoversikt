@@ -20,7 +20,6 @@
     methods: {
 
     },
-
   };
 </script>
 
@@ -35,21 +34,21 @@
     <div class="content">
       <nav class="sidenav">
         <ul class="main-nav">
-          <li>
-            <router-link class="material-icons" to="/">filter_list</router-link>
-          </li>
-          <li>
-            <router-link class="material-icons" to="/">rss_feed</router-link>
-          </li>
-          <li class="active">
-            <router-link class="material-icons" to="/">today</router-link>
-          </li>
-          <li>
-            <router-link class="material-icons" to="/">contacts</router-link>
-          </li>
-          <li>
-            <router-link class="material-icons" to="/">people</router-link>
-          </li>
+          <router-link tag="li" to="/filter_list">
+            <a class="material-icons">filter_list</a>
+          </router-link>
+          <router-link tag="li" to="/rss_feed">
+            <a class="material-icons">rss_feed</a>
+          </router-link>
+          <router-link tag="li" to="/today">
+            <a class="material-icons">today</a>
+          </router-link>
+          <router-link tag="li" to="/contacts">
+            <a class="material-icons">contacts</a>
+          </router-link>
+          <router-link tag="li" to="/people">
+            <a class="material-icons">people</a>
+          </router-link>
           <li>
             <i @click="showInfoDialog = true" class="material-icons">info</i>
           </li>

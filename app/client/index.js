@@ -19,6 +19,7 @@ moment.locale('nb');
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
+    linkActiveClass: 'active',
     routes,
 });
 
