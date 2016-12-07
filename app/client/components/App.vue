@@ -1,11 +1,13 @@
 <script>
   import CalendarFilters from './calendar/CalendarFilters.vue';
+  import CalendarSubscribe from './calendar/CalendarSubscribe.vue';
   import DialogOverlay from './misc/DialogOverlay.vue';
   import Login from './auth/Login.vue';
 
   export default {
     components: {
       CalendarFilters,
+      CalendarSubscribe,
       DialogOverlay,
       Login,
     },
@@ -14,6 +16,7 @@
       return {
         showLoginDialog: false,
         showInfoDialog: false,
+        sidebar: 2,
       };
     },
 
@@ -54,7 +57,8 @@
             <i @click="showInfoDialog = true" class="material-icons">info</i>
           </li>
         </ul>
-        <calendar-filters></calendar-filters>
+        <calendar-filters v-if="sidebar === 1"></calendar-filters>
+        <calendar-subscribe v-if="sidebar === 2"></calendar-subscribe>
       </nav>
       <main>
         <router-view></router-view>

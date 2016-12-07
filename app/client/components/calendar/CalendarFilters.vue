@@ -80,6 +80,7 @@
 <style lang="sass">
   .filters {
     overflow: auto;
+    flex: auto;
     padding: 0 1rem;
 
     & h2 {
