@@ -16,23 +16,31 @@
         const maleTeams = await this.$http.get('/event/team/male');
         const femaleTeams = await this.$http.get('/event/team/female');
 
-        function checkify(item, index) {
-          item.checked = index === 0;
+        this.categories = categories.data.map(item => {
+          item.checked = true;
           return item;
-        }
+        });
 
-        this.categories = categories.data.map(checkify);
-        this.maleTeams = maleTeams.data.map(checkify);
-        this.femaleTeams = femaleTeams.data.map(checkify);
+        this.maleTeams = maleTeams.data.map(item => {
+          item.checked = true;
+          return item;
+        });
+
+        this.femaleTeams = femaleTeams.data.map(item => {
+          item.checked = true;
+          return item;
+        });
+      },
+    },
+
+    computed: {
+      teams() {
+        return this.maleTeams.concat(this.femaleTeams);
       },
     },
 
     mounted() {
       this.fetchData();
-    },
-
-    watch: {
-      '$route': 'fetchData',
     },
   }
 </script>
