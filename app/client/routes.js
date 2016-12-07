@@ -5,6 +5,10 @@ import AuthRegister from './components/auth/Register.vue';
 export default [
     {
         path: '/',
+        redirect: '/filter_list',
+    },
+    {
+        path: '/filter_list',
         component: Home,
     },
     {
