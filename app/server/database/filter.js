@@ -28,7 +28,8 @@ export default function(conn) {
         },
 
         async findFilteredEvents(startDate, endDate, teamIds) {
-            const listOfQuestionmarks = teamIds.map((id, index) => index === teamIds.length - 1 ? '?' : '?,');
+            const listOfQuestionmarks = teamIds
+                .map((id, index) => index === teamIds.length - 1 ? '?' : '?,');
 
             return await conn.query(`
                 SELECT event.*, team.id AS team_id FROM event
@@ -37,7 +38,7 @@ export default function(conn) {
                     AND event.t1 > ?
                     AND event.t1 < ?
                     AND team.id IN (${listOfQuestionmarks})
-            `);
+            `, [startDate, endDate].concat(teamIds));
         },
 
         async addEvent(team_id, t1, t2, description) {
