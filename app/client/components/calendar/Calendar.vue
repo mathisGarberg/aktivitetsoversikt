@@ -1,7 +1,12 @@
 <script>
   import moment from 'moment';
+  import CalendarContent from './CalendarContent.vue';
 
   export default {
+    components: {
+      CalendarContent,
+    },
+
     data() {
       return {
         year: moment().year(),
@@ -86,25 +91,28 @@
 </script>
 
 <template>
-  <div class="calendar-navigation">
-    <div class="week-details">
-      <button>
-        <i class="material-icons" @click="pastWeek">chevron_left</i>
-      </button>
-      <div class="text">
-        <span>{{ monthAndYear }}</span>
-        <h2>Uke {{ week }}</h2>
+  <div class="calendar">
+    <div class="calendar-navigation">
+      <div class="week-details">
+        <button>
+          <i class="material-icons" @click="pastWeek">chevron_left</i>
+        </button>
+        <div class="text">
+          <span>{{ monthAndYear }}</span>
+          <h2>Uke {{ week }}</h2>
+        </div>
+        <button>
+          <i class="material-icons" @click="nextWeek">chevron_right</i>
+        </button>
       </div>
-      <button>
-        <i class="material-icons" @click="nextWeek">chevron_right</i>
-      </button>
-    </div>
-    <div ref="daysGrid" class="grid">
-      <div v-for="day in days" :class="{ 'grid-column': true, 'today': day.today, 'past': day.past }">
-        <div class="day">{{ day.name }}</div>
-        <div class="date">{{ day.date }}</div>
+      <div ref="daysGrid" class="grid">
+        <div v-for="day in days" :class="{ 'grid-column': true, 'today': day.today, 'past': day.past }">
+          <div class="day">{{ day.name }}</div>
+          <div class="date">{{ day.date }}</div>
+        </div>
       </div>
     </div>
+    <calendar-content></calendar-content>
   </div>
 </template>
 

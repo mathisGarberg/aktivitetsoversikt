@@ -1,13 +1,11 @@
 <script>
-  import CalendarNavigation from './calendar/CalendarNavigation.vue';
+  import Calendar from './calendar/Calendar.vue';
   import CalendarSubscribe from './calendar/CalendarSubscribe.vue';
-  import CalendarContent from './calendar/CalendarContent.vue';
 
   export default {
     components: {
-      CalendarNavigation,
+      Calendar,
       CalendarSubscribe,
-      CalendarContent,
     }
   };
 </script>
@@ -18,8 +16,7 @@
       <calendar-subscribe></calendar-subscribe>
     </aside>
     <div class="calendar-view">
-      <calendar-navigation></calendar-navigation>
-      <calendar-content></calendar-content>
+      <calendar></calendar>
     </div>
   </main>
 </template>
