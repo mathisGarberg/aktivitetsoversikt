@@ -4,38 +4,63 @@
   export default {
     data() {
       return {
-        days: [],
+        week: moment().week(),
       };
     },
 
+    methods: {
+      pastWeek() {
+        this.week = moment().week(this.week - 1).week();
+      },
+
+      nextWeek() {
+        this.week = moment().week(this.week + 1).week();
+      },
+    },
+
+    computed: {
+      momentDate() {
+        return moment().day('Monday').week(this.week);
+      },
+      monthAndYear() {
+        return moment(this.momentDate).format('MMMM, YYYY');
+      },
+      days() {
+        const startOfWeek = moment(this.momentDate).startOf('week').toDate();
+
+        const dayNames = [
+          'Mandag',
+          'Tirsdag',
+          'Onsdag',
+          'Torsdag',
+          'Fredag',
+          'Lørdag',
+          'Søndag'
+        ];
+
+        const days = [];
+
+        for (let dayIndex of [0, 1, 2, 3, 4, 5, 6]) {
+          const dayName = dayNames[dayIndex];
+          const date = moment(startOfWeek).add(dayIndex, 'days').toDate();
+
+          const formattedDate = moment(date).format('D.M');
+          const formattedNowDate = moment().format('D.M');
+
+          days.push({
+            name: dayName,
+            date: formattedDate,
+            today: formattedDate === formattedNowDate,
+            past: (new Date()) > date && formattedDate !== formattedNowDate,
+          });
+        }
+
+        return days;
+      },
+    },
+
     mounted() {
-      const startOfWeek = moment().startOf('week').toDate();
-      const endOfWeek = moment().endOf('week').toDate();
-
-      const dayNames = [
-        'Mandag',
-        'Tirsdag',
-        'Onsdag',
-        'Torsdag',
-        'Fredag',
-        'Lørdag',
-        'Søndag'
-      ];
-
-      for (let dayIndex of [0, 1, 2, 3, 4, 5, 6]) {
-        const dayName = dayNames[dayIndex];
-        const date = moment(startOfWeek).add(dayIndex, 'days').toDate();
-
-        const formattedDate = moment(date).format('D.M');
-        const formattedNowDate = moment().format('D.M');
-
-        this.days.push({
-          name: dayName,
-          date: formattedDate,
-          today: formattedDate === formattedNowDate,
-          past: (new Date()) > date && formattedDate !== formattedNowDate,
-        });
-      }
+      window.moment = moment;
 
       const dayGridEl = this.$refs.daysGrid;
 
@@ -51,14 +76,14 @@
   <div class="calendar-navigation">
     <div class="week-details">
       <button>
-        <i class="material-icons">chevron_left</i>
+        <i class="material-icons" @click="pastWeek">chevron_left</i>
       </button>
       <div class="text">
-        <span>October, 2016</span>
-        <h2>Uke 41</h2>
+        <span>{{ monthAndYear }}</span>
+        <h2>Uke {{ week }}</h2>
       </div>
       <button>
-        <i class="material-icons">chevron_right</i>
+        <i class="material-icons" @click="nextWeek">chevron_right</i>
       </button>
     </div>
     <div ref="daysGrid" class="grid">
@@ -89,6 +114,7 @@
         
         & .material-icons {
           font-size: 4rem;
+          cursor: pointer;
         }
       }
       
@@ -97,6 +123,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        text-shadow: 2px 1px 5px rgba(100, 100, 100, 1);
         
         & h2 {
           font-size: 4rem;
