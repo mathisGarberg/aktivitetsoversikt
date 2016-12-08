@@ -88,7 +88,7 @@
 </script>
 
 <template>
-  <div class="subscribe">
+  <div class="filters">
     <details open>
       <summary>FILTERE</summary>
       <ul>
@@ -106,7 +106,7 @@
           </details>
         </li>
         <li>
-          <details>
+          <details open>
             <summary>LAG - GUTTER</summary>
             <ul>
               <li v-for="maleTeam in filteredMaleTeams">
@@ -119,7 +119,7 @@
           </details>
         </li>
         <li>
-          <details>
+          <details open>
             <summary>LAG - JENTER</summary>
             <ul>
               <li v-for="femaleTeam in filteredFemaleTeams">
@@ -137,7 +137,7 @@
 </template>
 
 <style lang="sass">
-  .subscribe {
+  .filters {
     overflow: auto;
     flex: auto;
     padding: 0 1rem;

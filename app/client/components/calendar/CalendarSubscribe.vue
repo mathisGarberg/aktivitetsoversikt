@@ -26,7 +26,6 @@
       <h3>Epost</h3>
       <input type="email" placeholder="navn@domene.no">
     </label>
-  </div>
     <details open>
       <summary>OPPDAER MEG NÅR</summary>
       <ul>
@@ -56,6 +55,7 @@
         </li>
       </ul>
     </details>
+  </div>
 </template>
 
 <style lang="sass">

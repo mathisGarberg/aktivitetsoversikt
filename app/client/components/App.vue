@@ -16,12 +16,7 @@
       return {
         showLoginDialog: false,
         showInfoDialog: false,
-        sidebar: 2,
       };
-    },
-
-    methods: {
-
     },
   };
 </script>
@@ -41,7 +36,7 @@
             <a class="material-icons">filter_list</a>
           </router-link>
           <router-link tag="li" to="/subscribe">
-            <a class="material-icons">subscribe</a>
+            <a class="material-icons">rss_feed</a>
           </router-link>
           <router-link tag="li" to="/today">
             <a class="material-icons">today</a>
