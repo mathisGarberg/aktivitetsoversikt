@@ -1,12 +1,12 @@
 <script>
   import CalendarNavigation from './calendar/CalendarNavigation.vue';
-  import CalendarFilters from './calendar/CalendarFilters.vue';
+  import CalendarSubscribe from './calendar/CalendarSubscribe.vue';
   import CalendarContent from './calendar/CalendarContent.vue';
 
   export default {
     components: {
       CalendarNavigation,
-      CalendarFilters,
+      CalendarSubscribe,
       CalendarContent,
     }
   };
@@ -15,7 +15,7 @@
 <template>
   <main>
     <aside>
-      <calendar-filters></calendar-filters>
+      <calendar-subscribe></calendar-subscribe>
     </aside>
     <div class="calendar-view">
       <calendar-navigation></calendar-navigation>

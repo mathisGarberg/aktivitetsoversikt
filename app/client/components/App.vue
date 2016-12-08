@@ -56,12 +56,12 @@
             <i @click="showInfoDialog = true" class="material-icons">info</i>
           </li>
         </ul>
-        <calendar-filters v-if="sidebar === 1"></calendar-filters>
-        <calendar-subscribe v-if="sidebar === 2"></calendar-subscribe>
+        <!--
+<calendar-filters v-if="sidebar === 1"></calendar-filters>
+<calendar-subscribe v-if="sidebar === 2"></calendar-subscribe>
+-->
       </nav>
-      <main>
-        <router-view></router-view>
-      </main>
+      <router-view></router-view>
     </div>
     <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
       <h3 slot="title">Login</h3>
@@ -94,9 +94,8 @@
       flex: auto;
 
       & .sidenav {
-        width: 20rem;
+        width: 4rem;
         flex: none;
-        background: #1f1f1f;
         display: flex;
 
         & .main-nav {
@@ -174,7 +173,7 @@
         flex-direction: column;
         justify-content: center;
         font-size: 20px;
-        
+
         & button {
           border: none;
           background: rgba(0, 0, 0, 0.2);
@@ -183,6 +182,16 @@
           font-size: 1rem;
         }
       }
+    }
+
+    & main {
+      display: flex;
+    }
+
+    & main > aside {
+      background:  #1f1f1f;
+      width: 16rem;
+      flex: none;
     }
   }
 </style>
