@@ -40,8 +40,8 @@
           <router-link tag="li" to="/filter_list">
             <a class="material-icons">filter_list</a>
           </router-link>
-          <router-link tag="li" to="/rss_feed">
-            <a class="material-icons">rss_feed</a>
+          <router-link tag="li" to="/subscribe">
+            <a class="material-icons">subscribe</a>
           </router-link>
           <router-link tag="li" to="/today">
             <a class="material-icons">today</a>
@@ -56,10 +56,6 @@
             <i @click="showInfoDialog = true" class="material-icons">info</i>
           </li>
         </ul>
-        <!--
-<calendar-filters v-if="sidebar === 1"></calendar-filters>
-<calendar-subscribe v-if="sidebar === 2"></calendar-subscribe>
--->
       </nav>
       <router-view></router-view>
     </div>

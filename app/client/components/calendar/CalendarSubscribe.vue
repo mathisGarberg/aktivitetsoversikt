@@ -4,80 +4,12 @@
   export default {
     data() {
       return {
-        categories: [],
-        maleTeams: [],
-        femaleTeams: [],
       };
     },
 
     methods: {
       async fetchData() {
-        const categories = await this.$http.get('/event/category');
-        const maleTeams = await this.$http.get('/event/team/male');
-        const femaleTeams = await this.$http.get('/event/team/female');
 
-        this.categories = categories.data.map(item => {
-          const checked = Cookies.get(`categories.${item.id}`) === 'true';
-          item.checked = checked;
-          return item;
-        });
-
-        this.maleTeams = maleTeams.data.map(item => {
-          const checked = Cookies.get(`maleTeams.${item.id}`) === 'true';
-          item.checked = checked;
-          return item;
-        });
-
-        this.femaleTeams = femaleTeams.data.map(item => {
-          const checked = Cookies.get(`femaleTeams.${item.id}`) === 'true';
-          item.checked = checked;
-          return item;
-        });
-      },
-    },
-
-    watch: {
-      categories: {
-        handler(val, oldVal) {
-          val.forEach(category => {
-            Cookies.set(`categories.${category.id}`, category.checked);
-          });
-        },
-        deep: true,
-      },
-      maleTeams: {
-        handler(val, oldVal) {
-          val.forEach(maleTeam => {
-            Cookies.set(`maleTeams.${maleTeam.id}`, maleTeam.checked);
-          });
-        },
-        deep: true,
-      },
-      femaleTeams: {
-        handler(val, oldVal) {
-          val.forEach(femaleTeam => {
-            Cookies.set(`femaleTeams.${femaleTeam.id}`, femaleTeam.checked);
-          });
-        },
-        deep: true,
-      },
-    },
-
-    computed: {
-      selectedCategoryIds() {
-        return this.categories.filter(category => category.checked).map(category => category.id);
-      },
-
-      filteredMaleTeams() {
-        return this.maleTeams.filter(maleTeam => !!~this.selectedCategoryIds.indexOf(maleTeam.category_id));
-      },
-
-      filteredFemaleTeams() {
-        return this.femaleTeams.filter(femaleTeam => !!~this.selectedCategoryIds.indexOf(femaleTeam.category_id));
-      },
-
-      teams() {
-        return this.maleTeams.concat(this.femaleTeams);
       },
     },
 
@@ -94,52 +26,9 @@
       <h3>Epost</h3>
       <input type="email" placeholder="navn@domene.no">
     </label>
+  </div>
     <details open>
-      <summary>FILTERE</summary>
-      <ul>
-        <li>
-          <details open>
-            <summary>SPORT</summary>
-            <ul>
-              <li v-for="category in categories">
-                <label>
-                  <input type="checkbox" v-model="category.checked">
-                  <p>{{ category.name }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
-        </li>
-        <li>
-          <details>
-            <summary>LAG - GUTTER</summary>
-            <ul>
-              <li v-for="maleTeam in filteredMaleTeams">
-                <label>
-                  <input type="checkbox" v-model="maleTeam.checked">
-                  <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
-        </li>
-        <li>
-          <details>
-            <summary>LAG - JENTER</summary>
-            <ul>
-              <li v-for="femaleTeam in filteredFemaleTeams">
-                <label>
-                  <input type="checkbox" v-model="femaleTeam.checked">
-                  <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </details>
-    <details open>
-      <summary>TYPE AKTIVITET</summary>
+      <summary>OPPDAER MEG NÅR</summary>
       <ul>
         <li>
           <label>
@@ -167,7 +56,6 @@
         </li>
       </ul>
     </details>
-  </div>
 </template>
 
 <style lang="sass">

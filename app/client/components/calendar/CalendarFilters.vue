@@ -17,23 +17,65 @@
         const femaleTeams = await this.$http.get('/event/team/female');
 
         this.categories = categories.data.map(item => {
-          item.checked = true;
+          const checked = Cookies.get(`categories.${item.id}`) === 'true';
+          item.checked = checked;
           return item;
         });
 
         this.maleTeams = maleTeams.data.map(item => {
-          item.checked = true;
+          const checked = Cookies.get(`maleTeams.${item.id}`) === 'true';
+          item.checked = checked;
           return item;
         });
 
         this.femaleTeams = femaleTeams.data.map(item => {
-          item.checked = true;
+          const checked = Cookies.get(`femaleTeams.${item.id}`) === 'true';
+          item.checked = checked;
           return item;
         });
       },
     },
 
+    watch: {
+      categories: {
+        handler(val, oldVal) {
+          val.forEach(category => {
+            Cookies.set(`categories.${category.id}`, category.checked);
+          });
+        },
+        deep: true,
+      },
+      maleTeams: {
+        handler(val, oldVal) {
+          val.forEach(maleTeam => {
+            Cookies.set(`maleTeams.${maleTeam.id}`, maleTeam.checked);
+          });
+        },
+        deep: true,
+      },
+      femaleTeams: {
+        handler(val, oldVal) {
+          val.forEach(femaleTeam => {
+            Cookies.set(`femaleTeams.${femaleTeam.id}`, femaleTeam.checked);
+          });
+        },
+        deep: true,
+      },
+    },
+
     computed: {
+      selectedCategoryIds() {
+        return this.categories.filter(category => category.checked).map(category => category.id);
+      },
+
+      filteredMaleTeams() {
+        return this.maleTeams.filter(maleTeam => !!~this.selectedCategoryIds.indexOf(maleTeam.category_id));
+      },
+
+      filteredFemaleTeams() {
+        return this.femaleTeams.filter(femaleTeam => !!~this.selectedCategoryIds.indexOf(femaleTeam.category_id));
+      },
+
       teams() {
         return this.maleTeams.concat(this.femaleTeams);
       },
@@ -46,47 +88,56 @@
 </script>
 
 <template>
-  <div class="filters">
-    <h2>FILTERE</h2>
+  <div class="subscribe">
     <details open>
-      <summary>SPORT</summary>
+      <summary>FILTERE</summary>
       <ul>
-        <li v-for="category in categories">
-          <label>
-            <input type="checkbox" :checked="category.checked">
-            <p>{{ category.name }}</p>
-          </label>
+        <li>
+          <details open>
+            <summary>SPORT</summary>
+            <ul>
+              <li v-for="category in categories">
+                <label>
+                  <input type="checkbox" v-model="category.checked">
+                  <p>{{ category.name }}</p>
+                </label>
+              </li>
+            </ul>
+          </details>
         </li>
-      </ul>
-    </details>
-    <details>
-      <summary>LAG - GUTTER</summary>
-      <ul>
-        <li v-for="maleTeam in maleTeams">
-          <label>
-            <input type="checkbox" :checked="maleTeam.checked">
-            <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
-          </label>
+        <li>
+          <details>
+            <summary>LAG - GUTTER</summary>
+            <ul>
+              <li v-for="maleTeam in filteredMaleTeams">
+                <label>
+                  <input type="checkbox" v-model="maleTeam.checked">
+                  <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
+                </label>
+              </li>
+            </ul>
+          </details>
         </li>
-      </ul>
-    </details>
-    <details open>
-      <summary>LAG - JENTER</summary>
-      <ul>
-        <li v-for="femaleTeam in femaleTeams">
-          <label>
-            <input type="checkbox" :checked="femaleTeam.checked">
-            <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
-          </label>
+        <li>
+          <details>
+            <summary>LAG - JENTER</summary>
+            <ul>
+              <li v-for="femaleTeam in filteredFemaleTeams">
+                <label>
+                  <input type="checkbox" v-model="femaleTeam.checked">
+                  <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
+                </label>
+              </li>
+            </ul>
+          </details>
         </li>
       </ul>
     </details>
   </div>
 </template>
 
-
 <style lang="sass">
-  .filters {
+  .subscribe {
     overflow: auto;
     flex: auto;
     padding: 0 1rem;
@@ -97,11 +148,27 @@
       margin: 0;
     }
 
-    & details {
+    & h3 {
+      font-size: 1rem;
+      line-height: inherit;
+      margin: 0;
+      padding: .5rem 0;
+      font-weight: normal;
+    }
+    
+    & input[type="email"] {
+      padding: .5rem;
+      width: 100%;
+      border: none;
+      box-sizing: border-box;
+      font: inherit;
+    }
 
-      &:nth-of-type(n+2) {
-        margin-top: 1rem;
-      }
+    & > :nth-child(n+2) {
+      margin-top: 1rem;
+    }
+
+    & details {
 
       & summary {
         display: block;

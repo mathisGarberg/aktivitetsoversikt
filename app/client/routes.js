@@ -13,7 +13,7 @@ export default [
         component: Home,
     },
     {
-        path: '/rss_feed',
+        path: '/subscribe',
         component: Subscribe,
     },
     {
