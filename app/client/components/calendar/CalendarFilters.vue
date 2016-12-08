@@ -89,47 +89,37 @@
 
 <template>
   <div class="filters">
+    <h2>FILTERE</h2>
     <details open>
-      <summary>FILTERE</summary>
+      <summary>SPORT</summary>
       <ul>
-        <li>
-          <details open>
-            <summary>SPORT</summary>
-            <ul>
-              <li v-for="category in categories">
-                <label>
-                  <input type="checkbox" v-model="category.checked">
-                  <p>{{ category.name }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
+        <li v-for="category in categories">
+          <label>
+            <input type="checkbox" v-model="category.checked">
+            <p>{{ category.name }}</p>
+          </label>
         </li>
-        <li>
-          <details open>
-            <summary>LAG - GUTTER</summary>
-            <ul>
-              <li v-for="maleTeam in filteredMaleTeams">
-                <label>
-                  <input type="checkbox" v-model="maleTeam.checked">
-                  <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
+      </ul>
+    </details>
+    <details>
+      <summary>LAG - GUTTER</summary>
+      <ul>
+        <li v-for="maleTeam in filteredMaleTeams">
+          <label>
+            <input type="checkbox" v-model="maleTeam.checked">
+            <p>{{ maleTeam.gender }}{{ maleTeam.year }} {{ maleTeam.category }}</p>
+          </label>
         </li>
-        <li>
-          <details open>
-            <summary>LAG - JENTER</summary>
-            <ul>
-              <li v-for="femaleTeam in filteredFemaleTeams">
-                <label>
-                  <input type="checkbox" v-model="femaleTeam.checked">
-                  <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
-                </label>
-              </li>
-            </ul>
-          </details>
+      </ul>
+    </details>
+    <details>
+      <summary>LAG - JENTER</summary>
+      <ul>
+        <li v-for="femaleTeam in filteredFemaleTeams">
+          <label>
+            <input type="checkbox" v-model="femaleTeam.checked">
+            <p>{{ femaleTeam.gender }}{{ femaleTeam.year }} {{ femaleTeam.category }}</p>
+          </label>
         </li>
       </ul>
     </details>
@@ -138,6 +128,7 @@
 
 <style lang="sass">
   .filters {
+    max-height: 100%;
     overflow: auto;
     flex: auto;
     padding: 0 1rem;
@@ -155,7 +146,7 @@
       padding: .5rem 0;
       font-weight: normal;
     }
-    
+
     & input[type="email"] {
       padding: .5rem;
       width: 100%;
