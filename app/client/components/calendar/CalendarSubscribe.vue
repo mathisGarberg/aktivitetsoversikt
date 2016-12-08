@@ -27,7 +27,7 @@
       <input type="email" placeholder="navn@domene.no">
     </label>
     <details open>
-      <summary>OPPDAER MEG NÅR</summary>
+      <summary>OPPDATER MEG NÅR</summary>
       <ul>
         <li>
           <label>
