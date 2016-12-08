@@ -7,11 +7,11 @@
   <form class="login-form" action="">
     <label>
       <h3>E-post</h3>
-      <input type="text">
+      <input type="email" placeholder="navn@domene.no">
     </label>
     <label>
       <h3>Passord</h3>
-      <input type="text">
+      <input type="password" placeholder="●●●">
     </label>
     <div class="extra">
       <label>
@@ -21,7 +21,7 @@
       <a href="#">Glemt passord?</a>
     </div>
     <button>LOGG INN</button>
-    <a href="#">Ny bruker</a>
+    <a class="new-user" href="#">Ny bruker</a>
   </form>
 </template>
 
@@ -30,6 +30,7 @@
     display: flex;
     flex-direction: column;
     max-width: 20rem;
+    margin: 0 auto;
 
     & > :nth-child(n+2) {
       margin-top: 1rem;
@@ -72,14 +73,14 @@
       font: inherit;
       box-sizing: border-box;
       border: none;
-      padding: .5em;
+      padding: 1.5em;
       border-radius: .25rem;
       color: white;
       background: var(--theme-blue);
     }
-
-    & > button, & > a {
-      align-self: flex-end;
+    
+    & .new-user {
+      align-self: center;
     }
   }
 </style>

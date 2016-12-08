@@ -52,13 +52,15 @@
       animation: animate-up .5s;
       display: flex;
       flex-direction: column;
+      border-radius: .25rem;
+      overflow: hidden;
 
       & .window-bar {
         flex: none;
         display: flex;
         height: 2rem;
         justify-content: space-between;
-        
+
         & h3 {
           font-size: 1rem;
           font-weight: normal;
@@ -68,12 +70,16 @@
 
         & .close {
           border: none;
-          background: #e6e6e6;
+          background: none;
           width: 2rem;
           display: block;
           justify-content: center;
           align-items: center;
           
+          &:hover {
+            color: var(--theme-red);
+          }
+
           & .material-icons {
             font-size: 1rem;
           }
@@ -84,7 +90,7 @@
         padding: 1rem;
         overflow-y: auto;
         display: flex;
-        
+
         & > div {
           flex: auto;
         }
