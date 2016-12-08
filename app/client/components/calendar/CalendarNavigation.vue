@@ -4,23 +4,36 @@
   export default {
     data() {
       return {
+        year: moment().year(),
         week: moment().week(),
       };
     },
 
     methods: {
       pastWeek() {
-        this.week = moment().week(this.week - 1).week();
+        const past = this.week - 1;
+
+        if (past === 0) {
+          this.year--;
+        }
+
+        this.week = moment().week(past).week();
       },
 
       nextWeek() {
-        this.week = moment().week(this.week + 1).week();
+        const next = this.week + 1;
+
+        if (next === moment().weeksInYear() + 1) {
+          this.year++;
+        }
+
+        this.week = moment().week(next).week();
       },
     },
 
     computed: {
       momentDate() {
-        return moment().day('Monday').week(this.week);
+        return moment().day('Monday').year(this.year).week(this.week);
       },
       monthAndYear() {
         return moment(this.momentDate).format('MMMM, YYYY');
@@ -50,8 +63,8 @@
           days.push({
             name: dayName,
             date: formattedDate,
-            today: formattedDate === formattedNowDate,
-            past: (new Date()) > date && formattedDate !== formattedNowDate,
+            today: formattedDate === formattedNowDate && moment().year() === this.year,
+            past: moment().year() > this.year || (new Date()) > date && formattedDate !== formattedNowDate,
           });
         }
 
