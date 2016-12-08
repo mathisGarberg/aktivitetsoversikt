@@ -117,7 +117,14 @@
 </template>
 
 <style lang="sass">
+  .calendar {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .calendar-navigation {
+    flex: none;
+    
     & .week-details {
       display: flex;
       margin-bottom: 1rem;
