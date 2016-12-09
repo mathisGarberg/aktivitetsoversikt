@@ -71,12 +71,22 @@
         }
 
         & .close {
+          position: relative;
           border: none;
           background: none;
           width: 2rem;
           display: block;
           justify-content: center;
           align-items: center;
+          
+          &::after {
+            position: absolute;
+            content: '';
+            left: 0;
+            bottom: 0;
+            height: 3rem;
+            width: 3rem;
+          }
           
           &:hover {
             color: var(--theme-red);
