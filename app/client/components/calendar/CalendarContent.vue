@@ -10,7 +10,7 @@
     components: {
       DialogOverlay,
     },
-    
+
     data() {
       return {
         showEventDialog: false,
@@ -124,6 +124,9 @@
         </div>
       </div>
     </div>
+    <div class="horizontal-lines">
+      <hr v-for="n in 24" :style="`top: calc(var(--timeblock-height) * ${n})`">
+    </div>
     <dialog-overlay v-if="showEventDialog" @close="showEventDialog = false">
       <h3 slot="title">Event</h3>
       <div slot= "content">TODO: Add event details</div>
@@ -134,10 +137,21 @@
 <style lang="sass">
   .calendar-content {
     --timeblock-height: 5rem;
+    position: relative;
 
     overflow-y: scroll;
     background: var(--module-background);
     display: flex;
+
+    & .horizontal-lines hr {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0;
+      border: none;
+      height: 1px;
+      background: rgba(255, 255, 255, .1);
+    }
 
     & .timestamps {
       height: calc(var(--timeblock-height) * 24);
@@ -160,11 +174,12 @@
       & .grid-column {
         flex: 1 1 0;
         position: relative;
-        
+
         &:nth-child(odd) { background: rgba(0, 0, 0, .25) }
 
         & .event-group {
           position: absolute;
+          z-index: 1;
           left: 0;
           top: 0;
           width: 100%;
@@ -187,7 +202,7 @@
             background: var(--theme-blue);
             background-clip: padding-box;
             cursor: default;
-            
+
             &:hover {
               filter: brightness(1.2);
             }
@@ -195,7 +210,7 @@
             &:not(:only-child) {
               & .description { display: none }
             }
-            
+
             & .event-icon {
               height: 1rem;
               align-self: flex-start;
@@ -213,7 +228,7 @@
               margin-top: auto;
             }
           }
-          
+
           &.large-block .event {
             & time {
               display: none;
