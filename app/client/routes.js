@@ -1,16 +1,21 @@
 import Home from './components/Home.vue';
 import Subscribe from './components/Subscribe.vue';
+import People from './components/People.vue';
 import AuthLogin from './components/auth/Login.vue';
 import AuthRegister from './components/auth/Register.vue';
 
 export default [
     {
         path: '/',
-        redirect: '/filter_list',
+        redirect: '/filters',
     },
     {
-        path: '/filter_list',
+        path: '/filters',
         component: Home,
+    },
+    {
+        path: '/people',
+        component: People,
     },
     {
         path: '/subscribe',

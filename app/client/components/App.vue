@@ -32,7 +32,7 @@
     <div class="content">
       <nav class="sidenav">
         <ul class="main-nav">
-          <router-link tag="li" to="/filter_list">
+          <router-link tag="li" to="/filters">
             <a class="material-icons">filter_list</a>
           </router-link>
           <router-link tag="li" to="/subscribe">
