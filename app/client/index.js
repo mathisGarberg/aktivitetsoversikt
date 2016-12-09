@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import 'dom-shims';
 
 import moment from 'moment';
+import Cookies from 'js-cookie';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -13,6 +14,16 @@ import App from './components/App.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueRessource);
+
+const eventHub = new Vue();
+
+Vue.mixin({
+    data() {
+        return {
+            eventHub,
+        };
+    },
+});
 
 moment.locale('nb');
 
@@ -28,3 +39,6 @@ window.app = new Vue({
     router,
     render: h => h(App),
 });
+
+window.moment = moment;
+window.Cookies = Cookies;

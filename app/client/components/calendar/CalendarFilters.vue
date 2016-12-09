@@ -34,6 +34,12 @@
           return item;
         });
       },
+
+      saveTeamIds() {
+        Cookies.set('teamIds', this.teamIds);
+
+        this.eventHub.$emit('teamIds', this.teamIds);
+      },
     },
 
     watch: {
@@ -42,6 +48,8 @@
           val.forEach(category => {
             Cookies.set(`categories.${category.id}`, category.checked);
           });
+
+          this.saveTeamIds();
         },
         deep: true,
       },
@@ -50,6 +58,8 @@
           val.forEach(maleTeam => {
             Cookies.set(`maleTeams.${maleTeam.id}`, maleTeam.checked);
           });
+
+          this.saveTeamIds();
         },
         deep: true,
       },
@@ -58,6 +68,8 @@
           val.forEach(femaleTeam => {
             Cookies.set(`femaleTeams.${femaleTeam.id}`, femaleTeam.checked);
           });
+
+          this.saveTeamIds();
         },
         deep: true,
       },
@@ -76,8 +88,11 @@
         return this.femaleTeams.filter(femaleTeam => !!~this.selectedCategoryIds.indexOf(femaleTeam.category_id));
       },
 
-      teams() {
-        return this.maleTeams.concat(this.femaleTeams);
+      teamIds() {
+        return this.filteredMaleTeams
+          .concat(this.filteredFemaleTeams)
+          .filter(team => team.checked)
+          .map(team => team.id);
       },
     },
 

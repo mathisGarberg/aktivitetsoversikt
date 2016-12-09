@@ -1,6 +1,7 @@
 <script>
   import _ from 'lodash';
   import moment from 'moment';
+  import Cookies from 'js-cookie';
   import CalendarContent from './CalendarContent.vue';
 
   export default {
@@ -9,10 +10,13 @@
     },
 
     data() {
+      const teamIds = JSON.parse(Cookies.get('teamIds') || '[]');
+
       return {
         year: moment().year(),
         week: moment().week(),
         events: [],
+        teamIds,
       };
     },
 
@@ -20,11 +24,14 @@
       async fetchData() {
         this.events = [];
 
+        if (this.teamIds.length === 0)
+          return;
+
         const events = await this.$http.get('/event', {
           params: {
             year: this.year,
             week: this.week,
-            teamIds: [1],
+            teamIds: this.teamIds,
           },
         });
 
@@ -108,7 +115,10 @@
     mounted() {
       this.fetchData();
 
-      window.moment = moment;
+      this.eventHub.$on('teamIds', (ids) => {
+        this.teamIds = ids;
+        this.fetchData();
+      });
 
       const dayGridEl = this.$refs.daysGrid;
 
