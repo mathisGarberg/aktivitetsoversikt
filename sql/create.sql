@@ -40,13 +40,11 @@ CREATE TABLE team(
 CREATE TABLE event(
     id INTEGER NOT NULL AUTO_INCREMENT,
     team_id INTEGER NOT NULL,
-    category_id INTEGER NOT NULL,
     t1 TIMESTAMP NOT NULL, /* starttid */
     t2 TIMESTAMP NOT NULL, /* slutttid */
     description VARCHAR(100) NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(team_id) REFERENCES team(id),
-    FOREIGN KEY(category_id) REFERENCES category(id),
+    FOREIGN KEY(team_id) REFERENCES team(id)
 );
 
 /* Fasilitet */

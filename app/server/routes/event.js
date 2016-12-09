@@ -4,19 +4,13 @@ import Validator from 'validatorjs';
 const router = new express.Router();
 
 router.get('/', async function(req, res, next) {
-    const year = req.query.year;
-    const week = req.query.week;
-    const teamIds = req.query.teamIds;
+    const {
+        year,
+        week,
+        teamIds
+    } = req.query;
 
-    let events = null;
-
-    try {
-        events = await req.db.filter.findFilteredEvents(year, week, teamIds);
-    } catch(err) {
-        return next(err);
-    }
-
-    res.json(events);
+    res.json(await req.db.filter.findFilteredEvents(year, week, teamIds));
 });
 
 router.get('/category', async function(req, res) {
