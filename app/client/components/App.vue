@@ -30,8 +30,6 @@
       <h1 class="navbar-brand">Heddal IL</h1>
       <div class="navbar-right">
         <button @click="showLoginDialog = true">LOGG INN</button>
-      </div>
-      <div class="navbar-right">
         <button @click="showRegisterDialog = true">REGISTRER DEG</button>
       </div>
     </nav>
@@ -45,8 +43,8 @@
             <a class="material-icons">rss_feed</a>
           </router-link>
           <!--<router-link tag="li" to="/today">
-            <a class="material-icons">today</a>
-          </router-link>-->
+<a class="material-icons">today</a>
+</router-link>-->
           <router-link tag="li" to="/admin">
             <a class="material-icons">contacts</a>
           </router-link>
@@ -176,16 +174,19 @@
 
       .navbar-right {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         font-size: 20px;
 
         & button {
+          margin-left: .5rem;
           border: none;
           background: rgba(0, 0, 0, 0.2);
           padding: .5rem;
           color: inherit;
           font-size: 1rem;
+
+          &:hover {
+          background: rgba(0, 0, 0, 0.3);
+          }
         }
       }
     }
