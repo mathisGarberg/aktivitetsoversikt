@@ -38,7 +38,31 @@ INSERT INTO team(category_id, gender, year) VALUES(4, 'J', '15');
 /* Arrangement */
 INSERT INTO event(team_id, t1, t2, description) VALUES(
     1,
-    TIMESTAMP('2016-12-05', '12:00:00'),
     TIMESTAMP('2016-12-05', '16:00:00'),
-    'Testarrangement'
+    TIMESTAMP('2016-12-05', '18:00:00'),
+    'Test 1'
+);
+INSERT INTO event(team_id, t1, t2, description) VALUES(
+    2,
+    TIMESTAMP('2016-12-06', '16:00:00'),
+    TIMESTAMP('2016-12-06', '20:00:00'),
+    'Test 2'
+);
+INSERT INTO event(team_id, t1, t2, description) VALUES(
+    3,
+    TIMESTAMP('2016-12-06', '17:00:00'),
+    TIMESTAMP('2016-12-06', '21:00:00'),
+    'Test 3'
+);
+INSERT INTO event(team_id, t1, t2, description) VALUES(
+    4,
+    TIMESTAMP('2016-12-07', '16:00:00'),
+    TIMESTAMP('2016-12-06', '20:00:00'),
+    'Test 4'
+);
+INSERT INTO event(team_id, t1, t2, description) VALUES(
+    5,
+    TIMESTAMP('2016-12-08', '16:00:00'),
+    TIMESTAMP('2016-12-06', '20:00:00'),
+    'Test 5'
 );
