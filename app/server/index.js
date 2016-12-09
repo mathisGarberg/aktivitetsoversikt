@@ -5,12 +5,15 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
+import moment from 'moment';
 
 import databaseMiddleware from './middleware/database';
 import passportMiddleware from './middleware/passport';
 import validatorMiddleware from './middleware/validator';
 
 import routes from './routes';
+
+moment.locale('nb');
 
 const app = express();
 

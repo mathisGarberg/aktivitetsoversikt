@@ -1,4 +1,5 @@
 <script>
+  import _ from 'lodash';
   import moment from 'moment';
   import CalendarContent from './CalendarContent.vue';
 
@@ -11,10 +12,33 @@
       return {
         year: moment().year(),
         week: moment().week(),
+        events: [],
       };
     },
 
     methods: {
+      async fetchData() {
+        this.events = [];
+
+        const events = await this.$http.get('/event', {
+          params: {
+            year: this.year,
+            week: this.week,
+            teamIds: [1],
+          },
+        });
+
+        this.events = events.data.map(event => {
+          return {
+            day: moment(event.t1).weekday() + 1,
+            t1: moment(event.t1).hour() + moment(event.t1).minute() / 60,
+            t2: moment(event.t2).hour() + moment(event.t2).minute() / 60,
+            category: event.category,
+            description: event.description,
+          };
+        });
+      },
+
       pastWeek() {
         const past = this.week - 1;
 
@@ -23,6 +47,8 @@
         }
 
         this.week = moment().week(past).week();
+
+        this.fetchData();
       },
 
       nextWeek() {
@@ -33,6 +59,8 @@
         }
 
         this.week = moment().week(next).week();
+
+        this.fetchData();
       },
     },
 
@@ -41,7 +69,7 @@
         return moment().day('Monday').year(this.year).week(this.week);
       },
       monthAndYear() {
-        return moment(this.momentDate).format('MMMM, YYYY');
+        return _.capitalize(moment(this.momentDate).format('MMMM, YYYY'));
       },
       days() {
         const startOfWeek = moment(this.momentDate).startOf('week').toDate();
@@ -78,6 +106,8 @@
     },
 
     mounted() {
+      this.fetchData();
+
       window.moment = moment;
 
       const dayGridEl = this.$refs.daysGrid;
@@ -112,7 +142,7 @@
         </div>
       </div>
     </div>
-    <calendar-content></calendar-content>
+    <calendar-content :events="events"></calendar-content>
   </div>
 </template>
 

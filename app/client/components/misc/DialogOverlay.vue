@@ -45,10 +45,11 @@
     & .dialog-content {
       background: white;
       color: black;
-      height: 32rem;
-      width: 32rem;
+      height: auto;
+      width: auto;
       max-height: 90%;
       max-width: 90%;
+      padding: 1rem;
       animation: animate-up .5s;
       display: flex;
       flex-direction: column;
@@ -62,7 +63,7 @@
         justify-content: space-between;
 
         & h3 {
-          font-size: 1rem;
+          font-size: 1.2rem;
           font-weight: normal;
           align-self: center;
           margin: 0 .5rem;
@@ -87,7 +88,7 @@
       }
 
       & .content {
-        padding: 1rem;
+        padding: 1.5rem;
         overflow-y: auto;
         display: flex;
 

@@ -10,24 +10,14 @@
     components: {
       DialogOverlay,
     },
+    
+    props: {
+      events: Array,
+    },
 
     data() {
       return {
         showEventDialog: false,
-        events: [
-          { day: 1, t1: 16, t2: 19, type: 'football' },
-          { day: 1, t1: 19, t2: 20, type: 'biathlon' },
-          { day: 1, t1: 18, t2: 20, type: 'football' },
-          { day: 1, t1: 21.25, t2: 23, type: 'ski-race' },
-          { day: 3, t1: 17, t2: 18, type: 'football' },
-          { day: 3, t1: 20, t2: 24, type: 'ski-jump' },
-          { day: 3, t1: 21, t2: 23, type: 'ski-jump' },
-          { day: 1, t1: 16, t2: 18, type: 'football' },
-          { day: 4, t1: 16, t2: 19, type: 'biathlon' },
-          { day: 2, t1: 15, t2: 19, type: 'biathlon' },
-          { day: 5, t1: 20, t2: 21, type: 'football' },
-          { day: 5, t1: 21, t2: 23, type: 'ski-jump' },
-        ],
       };
     },
 
@@ -85,16 +75,15 @@
       },
     },
 
-    mounted() {
-      // Can this be implemented with some fancy vue magic?
+    updated() {
       let earlestEvent = 24;
-      document.querySelectorAll('.event').forEach((el) => {
+      this.$el.querySelectorAll('.event').forEach((el) => {
         if (el.dataset.start < earlestEvent) {
           earlestEvent = el.dataset.start;
-          document.querySelector('.calendar-content').scrollTop = el.offsetTop;
+          this.$el.scrollTop = el.offsetTop;
         }
       });
-    }
+    },
   };
 </script>
 
@@ -117,8 +106,8 @@
                :data-start="event.t1"
                class="event">
             <time>{{ event.t1 | numToTime }}</time>
-            <img :src="`/public/img/${event.type}.svg`" :alt="`${event.type}-icon`" class="event-icon">
-            <p class="description">A common need for data binding is manipulating an element’s class list and its inline styles. Since they are both attributes, we can use v-bind to handle them: we just need to calculate a final string with our expressions. However, meddling with string concatenation is annoying and error-prone. For this reason, Vue provides special enhancements when v-bind is used with class and style. In addition to strings, the expressions can also evaluate to objects or arrays.</p>
+            <img :src="`/public/img/${event.category}.svg`" :alt="`${event.category}-icon`" class="event-icon">
+            <p class="description">{{ event.description }}</p>
             <time>{{ event.t2 | numToTime }}</time>
           </div>
         </div>
