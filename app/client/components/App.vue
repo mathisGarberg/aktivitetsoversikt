@@ -43,8 +43,8 @@
             <a class="material-icons">rss_feed</a>
           </router-link>
           <!--<router-link tag="li" to="/today">
-<a class="material-icons">today</a>
-</router-link>-->
+           <a class="material-icons">today</a>
+          </router-link>-->
           <router-link tag="li" to="/admin">
             <a class="material-icons">contacts</a>
           </router-link>

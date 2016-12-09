@@ -135,6 +135,12 @@
 <style lang="sass">
   .people {
     background: #333;
+
+    & .title {
+      padding: .5rem;
+      background: var(--theme-red);
+      box-sizing: border-box;
+    }
   }
 
   .left-sidebar {
@@ -203,6 +209,10 @@
       box-sizing: border-box;
       font: inherit;
     }
+
+    & form {
+      margin-top: 10px;
+    }
   }
 
   .center-content {
@@ -211,12 +221,6 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-
-    & .title {
-      padding: .5rem;
-      background: var(--theme-red);
-      box-sizing: border-box;
-    }
 
     & .box-content {
       padding: 1rem;
