@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import 'dom-shims';
 
+import _ from 'lodash';
 import moment from 'moment';
 import Cookies from 'js-cookie';
 
@@ -40,5 +41,6 @@ window.app = new Vue({
     render: h => h(App),
 });
 
+window._ = _;
 window.moment = moment;
 window.Cookies = Cookies;

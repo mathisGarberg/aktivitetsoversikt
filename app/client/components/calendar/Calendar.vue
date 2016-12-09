@@ -22,28 +22,28 @@
 
     methods: {
       async fetchData() {
-        this.events = [];
+        if (this.teamIds.length > 0) {
+          const events = await this.$http.get('/event', {
+            params: {
+              year: this.year,
+              week: this.week,
+              teamIds: this.teamIds,
+            },
+          });
 
-        if (this.teamIds.length === 0)
-          return;
-
-        const events = await this.$http.get('/event', {
-          params: {
-            year: this.year,
-            week: this.week,
-            teamIds: this.teamIds,
-          },
-        });
-
-        this.events = events.data.map(event => {
-          return {
-            day: moment(event.t1).weekday() + 1,
-            t1: moment(event.t1).hour() + moment(event.t1).minute() / 60,
-            t2: moment(event.t2).hour() + moment(event.t2).minute() / 60,
-            category: event.category,
-            description: event.description,
-          };
-        });
+          this.events = events.data.map(event => {
+            return {
+              id: event.id,
+              day: moment(event.t1).weekday() + 1,
+              t1: moment(event.t1).hour() + moment(event.t1).minute() / 60,
+              t2: moment(event.t2).hour() + moment(event.t2).minute() / 60,
+              category: event.category,
+              description: event.description,
+            };
+          });
+        } else {
+          this.events = [];
+        }
       },
 
       pastWeek() {
