@@ -1,27 +1,62 @@
 <script>
   import Calendar from './calendar/Calendar.vue';
   import CalendarFilters from './calendar/CalendarFilters.vue';
+  import DialogOverlay from './misc/DialogOverlay.vue';
+  import Event from './event/Event.vue';
 
   export default {
     components: {
       Calendar,
       CalendarFilters,
+      DialogOverlay,
+      Event
     },
+    data() {
+      return {
+        showAddEventDialog: false
+      };
+
+    }
   };
 </script>
 
 <template>
   <main>
     <aside>
+      <button class="new-event" @click="showAddEventDialog = true">OPPRETT AKTIVITET</button>
       <calendar-filters></calendar-filters>
     </aside>
     <div class="calendar-view">
       <calendar></calendar>
     </div>
+    <dialog-overlay v-if="showAddEventDialog" @close="showAddEventDialog = false">
+      <h3 slot="title">Opprett aktivitet</h3>
+      <div slot= "content"><event></event></div>
+    </dialog-overlay>
   </main>
 </template>
 
-<style lang="sass">  
+<style lang="sass">
+  .new-event {
+    padding: 10px;
+    border-radius: 5px;
+    background: #009688;
+    color: #FFF;
+    border: none;
+    display: block;
+    margin: 10px auto;
+    font-weight: bold;
+    
+    &:hover {
+      cursor: pointer;
+    }
+    
+    &:active {
+      background: #00897B;
+    }
+    
+  }
+  
   .calendar-view {
     flex: auto;
     background-image: url('/public/img/fotball-background.jpg');
