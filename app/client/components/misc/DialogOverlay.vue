@@ -47,7 +47,7 @@
       background: white;
       color: black;
       height: auto;
-      width: auto;
+      width: 25rem;
       max-height: 90%;
       max-width: 90%;
       padding: 1rem;

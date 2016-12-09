@@ -1,6 +1,7 @@
 import Home from './components/Home.vue';
 import Subscribe from './components/Subscribe.vue';
 import People from './components/People.vue';
+import Admin from './components/Admin.vue';
 import AuthLogin from './components/auth/Login.vue';
 import AuthRegister from './components/auth/Register.vue';
 
@@ -14,12 +15,16 @@ export default [
         component: Home,
     },
     {
-        path: '/people',
-        component: People,
-    },
-    {
         path: '/subscribe',
         component: Subscribe,
+    },
+    {
+        path: '/admin',
+        component: Admin,
+    },
+    {
+        path: '/people',
+        component: People,
     },
     {
         path: '/auth/login',

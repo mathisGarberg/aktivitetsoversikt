@@ -3,6 +3,7 @@
   import CalendarSubscribe from './calendar/CalendarSubscribe.vue';
   import DialogOverlay from './misc/DialogOverlay.vue';
   import Login from './auth/Login.vue';
+  import Register from './auth/Register.vue';
 
   export default {
     components: {
@@ -10,11 +11,13 @@
       CalendarSubscribe,
       DialogOverlay,
       Login,
+      Register,
     },
 
     data() {
       return {
         showLoginDialog: false,
+        showRegisterDialog: false,
         showInfoDialog: false,
       };
     },
@@ -28,6 +31,9 @@
       <div class="navbar-right">
         <button @click="showLoginDialog = true">LOGG INN</button>
       </div>
+      <div class="navbar-right">
+        <button @click="showRegisterDialog = true">REGISTRER DEG</button>
+      </div>
     </nav>
     <div class="content">
       <nav class="sidenav">
@@ -38,10 +44,10 @@
           <router-link tag="li" to="/subscribe">
             <a class="material-icons">rss_feed</a>
           </router-link>
-          <router-link tag="li" to="/today">
+          <!--<router-link tag="li" to="/today">
             <a class="material-icons">today</a>
-          </router-link>
-          <router-link tag="li" to="/contacts">
+          </router-link>-->
+          <router-link tag="li" to="/admin">
             <a class="material-icons">contacts</a>
           </router-link>
           <router-link tag="li" to="/people">
@@ -54,12 +60,21 @@
       </nav>
       <router-view></router-view>
     </div>
+
     <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
-      <h3 slot="title">Login</h3>
+      <h3 slot="title">Innlogging</h3>
       <div slot= "content">
         <login></login>
       </div>
     </dialog-overlay>
+
+    <dialog-overlay v-if="showRegisterDialog" @close="showRegisterDialog = false">
+      <h3 slot="title">Ny bruker</h3>
+      <div slot= "content">
+        <register></register>
+      </div>
+    </dialog-overlay>
+
     <dialog-overlay v-if="showInfoDialog" @close="showInfoDialog = false">
       <h3 slot="title">Informasjon</h3>
       <div slot= "content">Mathis kan skrive noe her elns.</div>

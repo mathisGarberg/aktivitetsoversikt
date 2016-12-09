@@ -1,0 +1,57 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  margin: 0 auto;
+
+  & > :nth-child(n+2) {
+    margin-top: 1rem;
+  }
+
+  & > label {
+    display: block;
+    width: 100%;
+
+    & h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    & input {
+      width: 100%;
+      font: inherit;
+      box-sizing: border-box;
+      border: 2px solid #eaeaea;
+      padding: .5em;
+      border-radius: .25rem;
+    }
+  }
+
+  & .extra {
+    display: flex;
+    justify-content: space-between;
+
+    & label {
+      display: flex;
+      align-items: center;
+
+      & span {
+        margin-left: .5em;
+      }
+    }
+  }
+
+  & button {
+    font: inherit;
+    box-sizing: border-box;
+    border: none;
+    padding: 1.5em;
+    border-radius: .25rem;
+    color: white;
+    background: var(--theme-blue);
+  }
+  
+  & .new-user {
+    align-self: center;
+  }
+}

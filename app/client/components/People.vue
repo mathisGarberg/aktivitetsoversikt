@@ -1,13 +1,11 @@
 <script>
-
   export default {
-    components: {
-    },
+
   };
 </script>
 
 <template>
-  <main>
+  <main class="people">
     <div class="left-sidebar">
       <div class="team-search">
         <h3>Lagoversikt</h3>
@@ -124,126 +122,146 @@
   </main>
 </template>
 
-<style lang="sass">  
-  .left-sidebar{
+<style lang="sass">
+  .left-sidebar {
     float: left;
     width: 15%;
     background: #1F1F1F;
     height: 100%;
     padding: 10px;
+
+    & .team-search {
+      color: #fff;
+
+      & h3 {
+        color: #fff;
+        margin: 0;
+      }
+
+      & p {
+        margin-top: 0;
+      }
+
+      & input[type=text] {
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px;
+        height: 30px;
+        border: 0px;
+      }
+    }
   }
 
-  .center-content{
-    width: 63%;
-    height: 100%;
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .right-sidebar{
+  .right-sidebar {
     float: left;
     height: 100%;
     background: #1F1F1F;
     width: 20%;
     padding: 10px;
     box-sizing: border-box;
-  }
 
-  .left-sidebar > .team-search{
-    color: #fff;
-  }
+    & ul {
+      padding: 0;
 
-  .left-sidebar > .team-search > h3{
-    color: #fff;
-    margin: 0px;
-  }
+      & li {
+        display: inline;
+        padding: 10px;
+      }
+    }
 
-  .left-sidebar > .team-search p{
-    margin-top: 0px;
-  }
-
-  .left-sidebar > .team-search input[type=text]{
-    width: 100%;
-    border-radius: 5px;
-    padding: 10px;
-    height: 30px;
-    border: 0px;
+    & input[type=text] {
+      width: 100%;
+      border-radius: 5px;
+      height: 30px;
+      padding: 10px;
+      border: 0px;
+    }
   }
 
   #results {
     background: #555555;
     padding: 10px;
     color: #fff;
+
+    & ul {
+      padding: 0;
+
+      & :-first-child {
+        display: block;
+        padding: 0px;
+      }
+
+      & li {
+        display: block;
+        padding: 5px;
+      }
+
+      & .selected {
+        color: red;
+      }
+    }
   }
 
-  #results ul {
-    padding: 0px;
-  }
-
-  #results ul li{
-    display: block;
-    padding: 5px;
-  }
-
-  #results ul:first-child{
-    display: block;
-    padding: 0px;
-  }
-
-  #results ul .selected {
-    color: red;
-  }
-
-
-
-  /*Trener infromasjon */
-
-  .title{
-    width: 100%;
+  .center-content {
+    width: 63%;
+    height: 100%;
+    float: left;
     padding: 10px;
-    background: #FA5952;
     box-sizing: border-box;
-    color: #fff;
-    margin-bottom: 10px;
+    overflow-y: scroll;
+
+    & .title {
+      width: 100%;
+      padding: 10px;
+      background: #FA5952;
+      box-sizing: border-box;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    & .trainer-information {
+      width: 49%;
+      height: 400px;
+      background: #1F1F1F;
+      float: left;
+
+      & table {
+        color: #fff;
+        padding: 10px;
+
+        & td {
+          padding: 10px;
+        }
+      }
+
+      & .button {
+        height: 50px;
+        width: 150px;
+        line-height: 50px;
+        text-align: center;
+        background: #129384;
+        margin-left: 20px;
+        color: #fff;
+        border-radius: 5px;
+      }
+    }
+
+    & .main-box {
+      width: 49%;
+      height: 400px;
+      background: #1F1F1F;
+      float: right;
+
+      & table {
+        padding: 10px;
+        color: #fff;
+      }
+
+      & table td {
+        padding: 10px;
+      }
+    }
   }
-
-  .center-content .trainer-information {
-     width: 49%;
-     height: 400px;
-     background: #1F1F1F;
-     float: left;
-   }
-
-  .center-content .trainer-information table {
-    color: #fff;
-    padding: 10px;
-  }
-
-  .center-content .trainer-information table td {
-    padding: 10px;
-  }
-
-  .center-content .trainer-information .button {
-    height: 50px;
-    width: 150px;
-    line-height: 50px;
-    text-align: center;
-    background: #129384;
-    margin-left: 20px;
-    color: #fff;
-    border-radius: 5px;
-  }
-
-  .center-content .main-box {
-    width: 49%;
-    height: 400px;
-    background: #1F1F1F;
-    float: right;
-  }
-
-
-  /*player information */
 
   .player-information{
     width: 100%;
@@ -251,56 +269,26 @@
     background: #1F1F1F;
     float: left;
     margin-top: 15px;
-  }
 
-  .player-information table {
-    padding: 10px;
-    color: #fff;
-  }
+    & table {
+      padding: 10px;
+      color: #fff;
+    }
 
-  .player-information table td {
-    padding: 10px;
-  }
+    & table td {
+      padding: 10px;
+    }
 
-  .player-information .profile-image{
-    width: 100px;
-    height: 100px;;
-    margin-left: 20px;
-    text-align: center;
-  }
+    & .profile-image {
+      width: 100px;
+      height: 100px;
+      margin-left: 20px;
+      text-align: center;
 
-  .player-information .profile-image > img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  /*main-box */
-
-  .main-box table{
-    padding: 10px;
-    color: #fff;
-  }
-
-  .main-box table td{
-    padding: 10px;
-  }
-
-  /*Right sidebar */
-
-  .right-sidebar ul{
-    padding: 0px;
-  }
-
-  .right-sidebar ul li{
-    display: inline;
-    padding: 10px;
-  }
-
-  .right-sidebar input[type=text]{
-    width: 100%;
-    border-radius: 5px;
-    height: 30px;
-    padding: 10px;
-    border: 0px;
+      & img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
   }
 </style>
