@@ -27,7 +27,36 @@
       <input type="email" placeholder="navn@domene.no">
     </label>
     <details open>
-      <summary>OPPDATER MEG NÅR</summary>
+      <summary>Jeg vil oppdateres på:</summary>
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <p>Fotball</p>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <p>Langrenn</p>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <p>Skihopp</p>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <p>Skiskyting</p>
+          </label>
+        </li>
+      </ul>
+    </details>
+    <details open>
+      <summary>Oppdater meg når:</summary>
       <ul>
         <li>
           <label>
@@ -55,6 +84,7 @@
         </li>
       </ul>
     </details>
+    <button class="sub-btn">Abonner</button>
   </div>
 </template>
 
@@ -129,5 +159,23 @@
         }
       }
     }
+    
+    & .sub-btn {
+      padding: 10px;
+      border: none;
+      color: #FFF;
+      background: #009688;
+      border-radius: 5px;
+      
+      &:hover {
+        cursor: pointer;
+      }
+      
+      &:active {
+        background: #00897B;
+      }
+      
+    }
+    
   }
 </style>

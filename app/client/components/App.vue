@@ -4,6 +4,7 @@
   import DialogOverlay from './misc/DialogOverlay.vue';
   import Login from './auth/Login.vue';
   import Register from './auth/Register.vue';
+  import Info from './info/Info.vue';
 
   export default {
     components: {
@@ -12,6 +13,7 @@
       DialogOverlay,
       Login,
       Register,
+      Info,
     },
 
     data() {
@@ -75,7 +77,7 @@
 
     <dialog-overlay v-if="showInfoDialog" @close="showInfoDialog = false">
       <h3 slot="title">Informasjon</h3>
-      <div slot= "content">Mathis kan skrive noe her elns.</div>
+      <div slot= "content"><Info></Info></div>
     </dialog-overlay>
   </div>
 </template>
