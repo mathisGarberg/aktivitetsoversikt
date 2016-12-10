@@ -23,7 +23,7 @@
 <template>
   <main>
     <aside>
-      <button class="new-event" @click="showAddEventDialog = true">OPPRETT AKTIVITET</button>
+      <button class="new-event" @click="showAddEventDialog = true">Opprett aktivitet</button>
       <calendar-filters></calendar-filters>
     </aside>
     <div class="calendar-view">
@@ -45,7 +45,6 @@
     border: none;
     display: block;
     margin: 10px auto;
-    font-weight: bold;
     
     &:hover {
       cursor: pointer;
