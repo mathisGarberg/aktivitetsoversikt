@@ -20,36 +20,38 @@ function login(req, res, next) {
 }
 
 router.post('/register', async function(req, res, next) {
-    const validation = Validator(req.body, {
-        full_name: 'required|between:5,20',
-        username: 'required|username_available|between:3,20',
-        password: 'required|confirmed|min:5',
-    });
-
-    if (await validation.promise.fails()) {
-        res.json({
-            errors: validation.errors(),
-        });
-        return;
-    }
-
-    const role_id = 1;
-
     try {
-        await req.db.user.add(
-            role_id,
-            req.body.full_name,
-            req.body.username,
-            req.body.password
-        );
-    } catch (err) {
-        res.json({
-            err: "User couldn't be registered due to an error.",
+        const validation = new Validator(req.body, {
+            email: 'required|email',
+            phone: 'required',
+            first_name: 'required|between:2,20',
+            last_name: 'required|between:2,20',
+            username: 'required|username_available|between:3,20',
+            password: 'required|confirmed|min:5',
         });
-        return;
-    }
 
-    login(req, res, next);
+        validation.fails(() => {
+            res.json(validation.errors);
+        });
+
+        validation.passes(async () => {
+            const role_id = 1;
+
+            await req.db.user.add(
+                role_id,
+                req.body.email,
+                req.body.phone,
+                req.body.first_name,
+                req.body.last_name,
+                req.body.username,
+                req.body.password
+            );
+
+            login(req, res, next);
+        });
+    } catch(err) {
+        next(err);
+    }
 });
 
 router.post('/login', async function(req, res, next) {
@@ -58,14 +60,13 @@ router.post('/login', async function(req, res, next) {
         password: 'required|min:5',
     });
 
-    if (await validation.promise.fails()) {
-        res.json({
-            errors: validation.errors(),
-        });
-        return;
-    }
+    validation.fails(() => {
+        res.json(validation.errors);
+    });
 
-    login(req, res, next);
+    validation.passes(() => {
+        login(req, res, next);
+    });
 });
 
 router.get('/logout', async function(req, res, next) {

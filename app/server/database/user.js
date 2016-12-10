@@ -12,15 +12,18 @@ export default function(conn) {
             return rows[0];
         },
 
-        async add(role_id, full_name, username, password) {
+        async add(role_id, email, phone, first_name, last_name, username, password) {
             const salt = await bcrypt.promise.genSalt(10);
             const hash = await bcrypt.promise.hash(password, salt);
 
             await conn.query('INSERT INTO user SET ?', {
-                role_id: role_id,
+                role_id,
+                email,
                 username,
                 password: hash,
-                full_name,
+                phone,
+                first_name,
+                last_name,
             });
         },
 
