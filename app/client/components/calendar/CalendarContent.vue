@@ -10,7 +10,7 @@
     components: {
       DialogOverlay,
     },
-    
+
     props: {
       events: Array,
     },
@@ -18,6 +18,7 @@
     data() {
       return {
         showEventDialog: false,
+        shownEvent: {},
       };
     },
 
@@ -101,7 +102,7 @@
              v-if="group[0].day === n"
              :class="{ 'event-group': true, 'large-block': group.length > 2 }">
           <div v-for="event in group"
-               @click="showEventDialog = true"
+               @click="showEventDialog = true; shownEvent = event"
                :style="event.styles"
                :data-start="event.t1"
                class="event">
@@ -118,7 +119,14 @@
     </div>
     <dialog-overlay v-if="showEventDialog" @close="showEventDialog = false">
       <h3 slot="title">Event</h3>
-      <div slot= "content">TODO: Add event details</div>
+      <div slot= "content">
+        <div>
+          <time>{{ shownEvent.t1 | numToTime }}</time>
+          <span>-</span> 
+          <time>{{ shownEvent.t2 | numToTime }}</time>
+        </div>
+        <p class="description">{{ shownEvent.description }}</p>
+      </div>
     </dialog-overlay>
   </div>
 </template>
