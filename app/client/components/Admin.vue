@@ -192,6 +192,16 @@
     & .top-boxes {
       display: flex;
 
+      & form {
+        display: flex;
+        flex-direction: column;
+        
+        & table {
+          width: calc(100% + 1rem);
+          margin: 0 -.5rem
+        }
+      }
+
       & .trainer-information {
         flex: 1 1 0;
         background: #1F1F1F;
@@ -216,6 +226,7 @@
         color: inherit;
         text-decoration: none;
         display: inline-block;
+        align-self: flex-end;
       }
     }
 
