@@ -11,12 +11,16 @@
       DialogOverlay,
       Event
     },
+
+    props: [
+      'user',
+    ],
+
     data() {
       return {
-        showAddEventDialog: false
+        showAddEventDialog: false,
       };
-
-    }
+    },
   };
 </script>
 
@@ -24,7 +28,7 @@
   <main>
     <aside>
       <calendar-filters></calendar-filters>
-      <button class="new-event" @click="showAddEventDialog = true">Opprett aktivitet</button>
+      <button class="new-event" v-if="user" @click="showAddEventDialog = true">Opprett aktivitet</button>
     </aside>
     <div class="calendar-view">
       <calendar></calendar>

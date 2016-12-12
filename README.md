@@ -1,16 +1,20 @@
-# Webbasert aktivitetsoversikt
+# Aktivitetsoversikt (Activity overview)
 
-Prosjektet består av en server del og en klient del. På kleintsiden brukes Vue.js og på serversiden brukes Express.js
+The project consists of a server part and a client part. On the client side Vue.js is used and on the server side Express.js is used.
 
-## Oppsett
-* Klon prosjektet
-* Kjør `npm install`
-* Opprett en database.json i samme mappe som denne README-filen
+## Initial setup
+* `git clone` the project
+* Run `npm install` to install the dependencies
+* Run `npm run build` to build the bundle.js file
+* Create a database.json file in the same folder as this README-file
+* Run the project by running `node --harmony app.js`
 
-Husk å kjøre `npm install` etter at du har kjørt `git pull`. Det kan hende
-at nye avhengigheter er blitt lagt til.
+The project requires that you have Node.js and MySQL installed on your machine.
 
-## `database.json` struktur
+Upon the first request the application will create a database table automatically with the same name
+as the "database" field in the database.json file, so this should not be done manually.
+
+## `database.json` structure
 ```json
 {
     "host": "localhost",
@@ -20,17 +24,9 @@ at nye avhengigheter er blitt lagt til.
 }
 ```
 
-## Utvikling
-For å kjøre prosjektet kreves det at man kjører to forskjellige kommandoer parallelt.
-<br>
-`npm start`
-<br>
-`npm run debug`
-<br>
-Prosjektet serveres på port 3001 (gjennom en proxy til port 3000). Webpack vil automatisk refreshe
-nettleseren når du endrer filene og lagrer dem, så det er ikke nødvendig å refreshe nettleseren
-manuelt.
+## Admin user
+Username: admin
+Password: fotball
 
-## Admin bruker
-Brukernavn: admin
-Passord: fotball
+The admin user will be added to the database automatically once it's created, so this user
+can be used right off the bat.
