@@ -7,6 +7,27 @@
 <template>
   <main class="people">
     <aside class="left-sidebar">
+      <div class="tabs">
+        <button class="active">Trener / lagleder</button>
+        <button>Aktivitetsarena</button>
+      </div>
+
+      <form>
+        <input type="text" name="" id="" placeholder="Søk etter navn"/>
+      </form>
+      <div class="results">
+        <ul>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+          <li>Navn resultat</li>
+        </ul>
+      </div>
     </aside>
     <div class="center-content">
       <div class="top-boxes">
@@ -54,7 +75,7 @@
             <form action="">
               <table>
                 <tr>
-                  <td>Banenanvn</td>
+                  <td>Banenavn</td>
                   <td><input type="text"></td>
                 </tr>
                 <tr>
@@ -74,29 +95,6 @@
         </div>
       </div>
     </div>
-    <aside class="right-sidebar">
-      <div class="tabs">
-        <button class="active">Trener / lagleder</button>
-        <button>Aktivitetsarena</button>
-      </div>
-
-      <form>
-        <input type="text" name="" id="" placeholder="Søk etter navn"/>
-      </form>
-      <div class="results">
-        <ul>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-          <li>Navn resultat</li>
-        </ul>
-      </div>
-    </aside>
   </main>
 </template>
 
@@ -128,7 +126,7 @@
     }
   }
 
-  .right-sidebar {
+  .left-sidebar {
     padding: 1rem;
 
     & .results {
