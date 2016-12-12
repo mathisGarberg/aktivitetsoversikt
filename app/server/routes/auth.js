@@ -30,6 +30,16 @@ router.post('/register', async function(req, res, next) {
             password: 'required|confirmed|min:5',
         });
 
+        validation.setAttributeNames({
+            email: 'Epost',
+            phone: 'Telefonnummer',
+            first_name: 'Fornavn',
+            last_name: 'Etternavn',
+            username: 'Brukernavn',
+            password: 'Passord',
+            password_confirmed: 'Gjenta passord',
+        });
+
         validation.fails(() => {
             res.json(validation.errors);
         });
@@ -55,18 +65,27 @@ router.post('/register', async function(req, res, next) {
 });
 
 router.post('/login', async function(req, res, next) {
-    const validation = Validator(req.body, {
-        username: 'required|username_exists|between:3,20',
-        password: 'required|min:5',
-    });
+    try {
+        const validation = new Validator(req.body, {
+            username: 'required|username_exists|between:3,20',
+            password: 'required|min:5',
+        });
 
-    validation.fails(() => {
-        res.json(validation.errors);
-    });
+        validation.setAttributeNames({
+            username: 'Brukernavn',
+            password: 'Passord',
+        });
 
-    validation.passes(() => {
-        login(req, res, next);
-    });
+        validation.fails(() => {
+            res.json(validation.errors);
+        });
+
+        validation.passes(() => {
+            login(req, res, next);
+        });
+    } catch(err) {
+        next(err);
+    }
 });
 
 router.get('/logout', async function(req, res, next) {
