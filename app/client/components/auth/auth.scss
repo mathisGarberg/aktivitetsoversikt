@@ -40,16 +40,6 @@
       }
     }
   }
-
-  & button {
-    font: inherit;
-    box-sizing: border-box;
-    border: none;
-    padding: 1.5em;
-    border-radius: .25rem;
-    color: white;
-    background: var(--theme-blue);
-  }
   
   & .new-user {
     align-self: center;
