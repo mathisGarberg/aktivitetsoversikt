@@ -152,7 +152,7 @@
         </div>
       </div>
     </div>
-    <calendar-content :events="events"></calendar-content>
+    <calendar-content :events="events"  :week="week"></calendar-content>
   </div>
 </template>
 

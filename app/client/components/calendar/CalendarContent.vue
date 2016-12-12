@@ -1,5 +1,6 @@
 <script>
   import _ from 'lodash';
+  import moment from 'moment';
   import DialogOverlay from './../misc/DialogOverlay.vue';
 
   function pad(n) {
@@ -13,12 +14,14 @@
 
     props: {
       events: Array,
+      week: Number,
     },
 
     data() {
       return {
         showEventDialog: false,
         shownEvent: {},
+        time: moment.duration(`${moment().hour()}:${moment().minute()}`).asHours(),
       };
     },
 
@@ -32,7 +35,15 @@
     },
 
     computed: {
-      groups() {
+      thisWeek() {
+        return moment().week();
+      },
+
+      thisWeekDay() {
+        return moment().day();
+      },
+
+      groups() {        
         // Create a copy of the events array
         const events = this.events.slice(0);
 
@@ -112,6 +123,9 @@
             <time>{{ event.t2 | numToTime }}</time>
           </div>
         </div>
+        <div class="today-bar"
+             v-if="thisWeek === week && n === thisWeekDay"
+             :style="`top: calc(var(--timeblock-height) * (${ time }))`"></div>
       </div>
     </div>
     <div class="horizontal-lines">
@@ -139,6 +153,26 @@
     overflow-y: scroll;
     background: var(--module-background);
     display: flex;
+
+    & .today-bar {
+      position: absolute;
+      z-index: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--theme-red);
+      width: 100%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -8px;
+        top: -6px;
+        background: var(--theme-red);
+        border-radius: 50%;
+        height: 16px;
+        width: 16px;
+      }
+    }
 
     & .horizontal-lines hr {
       position: absolute;
