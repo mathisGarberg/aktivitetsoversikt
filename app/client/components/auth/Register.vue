@@ -26,7 +26,7 @@
           value: '',
           errors: [],
         },
-        password_confirmed: {
+        password_confirmation: {
           value: '',
           errors: [],
         },
@@ -42,7 +42,7 @@
           last_name: this.last_name.value,
           username: this.username.value,
           password: this.password.value,
-          password_confirmed: this.password_confirmed.value,
+          password_confirmation: this.password_confirmation.value,
         });
 
         if (res.data.errors) {
@@ -51,6 +51,9 @@
           for (let field of Object.keys(errors)) {
             this[field].errors = errors[field];
           }
+        } else {
+          this.eventHub.$emit('user', res.data.user);
+          this.$emit('close');
         }
       },
     },
@@ -103,9 +106,9 @@
     </label>
     <label>
       <h3>Gjenta passord</h3>
-      <input type="password" v-model="password_confirmed.value" placeholder="●●●●●●●●●●●●">
+      <input type="password" v-model="password_confirmation.value" placeholder="●●●●●●●●●●●●">
       <ul class="errors">
-        <li v-for="error in password_confirmed.errors">{{ error }}</li>
+        <li v-for="error in password_confirmation.errors">{{ error }}</li>
       </ul>
     </label>
     <button @click.prevent="register">OPPRETT NY BRUKER</button>

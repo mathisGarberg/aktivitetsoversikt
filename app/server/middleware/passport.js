@@ -9,7 +9,7 @@ export default async (req, res, next) => {
             if (!user)
                 return done(null, false);
 
-            const isValid = await req.db.user.validate(email, password);
+            const isValid = await req.db.user.validate(username, password);
 
             if (!isValid)
                 return done(null, false);

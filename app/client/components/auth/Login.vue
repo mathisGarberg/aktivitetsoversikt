@@ -31,6 +31,9 @@
           for (let field of Object.keys(errors)) {
             this[field].errors = errors[field];
           }
+        } else {
+          this.eventHub.$emit('user', res.data.user);
+          this.$emit('close');
         }
       },
     },

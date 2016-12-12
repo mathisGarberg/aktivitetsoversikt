@@ -6,15 +6,17 @@ import Validator from 'validatorjs';
 const router = new express.Router();
 
 function login(req, res, next) {
-    passport.authenticate('local', async (err, user, info) => {
+    passport.authenticate('local', async (err, userPromise, info) => {
         if (err) return next(err);
 
-        await req.promise.login(user, {});
+        const user = await userPromise;
 
-        delete user.password;
+        req.login(user, async function(err) {
+            delete user.password;
 
-        res.json({
-            user,
+            res.json({
+                user,
+            });
         });
     })(req, res, next);
 }
@@ -37,7 +39,7 @@ router.post('/register', async function(req, res, next) {
             last_name: 'Etternavn',
             username: 'Brukernavn',
             password: 'Passord',
-            password_confirmed: 'Gjenta passord',
+            password_confirmation: 'Gjenta passord',
         });
 
         validation.fails(() => {

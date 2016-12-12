@@ -18,10 +18,25 @@
 
     data() {
       return {
+        user: window.global.user,
+
         showLoginDialog: false,
         showRegisterDialog: false,
         showInfoDialog: false,
       };
+    },
+
+    methods: {
+      async logout() {
+        this.user = null;
+        await this.$http.get('/auth/logout');
+      },
+    },
+
+    mounted() {
+      this.eventHub.$on('user', (user) => {
+        this.user = user;
+      });
     },
   };
 </script>
@@ -31,8 +46,14 @@
     <nav class="navbar">
       <h1 class="navbar-brand">Heddal IL</h1>
       <div class="navbar-right">
-        <button @click="showLoginDialog = true">LOGG INN</button>
-        <button @click="showRegisterDialog = true">REGISTRER DEG</button>
+        <template v-if="user">
+          <div>{{ user.first_name }} &lt;{{ user.email }}&gt;</div>
+          <button @click="logout">Logg ut</button>
+        </template>
+        <template v-else>
+          <button @click="showLoginDialog = true">LOGG INN</button>
+          <button @click="showRegisterDialog = true">REGISTRER DEG</button>
+        </template>
       </div>
     </nav>
     <div class="content">
@@ -44,10 +65,7 @@
           <router-link tag="li" to="/subscribe">
             <a class="material-icons">rss_feed</a>
           </router-link>
-          <!--<router-link tag="li" to="/today">
-           <a class="material-icons">today</a>
-          </router-link>-->
-          <router-link tag="li" to="/admin">
+          <router-link tag="li" to="/admin" v-if="user && user.role_id == 5">
             <a class="material-icons">contacts</a>
           </router-link>
           <router-link tag="li" to="/people">
@@ -58,20 +76,20 @@
           </li>
         </ul>
       </nav>
-      <router-view></router-view>
+      <router-view :user="user"></router-view>
     </div>
 
     <dialog-overlay v-if="showLoginDialog" @close="showLoginDialog = false">
       <h3 slot="title">Innlogging</h3>
       <div slot= "content">
-        <login></login>
+        <login @close="showLoginDialog = false"></login>
       </div>
     </dialog-overlay>
 
     <dialog-overlay v-if="showRegisterDialog" @close="showRegisterDialog = false">
       <h3 slot="title">Ny bruker</h3>
       <div slot= "content">
-        <register></register>
+        <register @close="showRegisterDialog = false"></register>
       </div>
     </dialog-overlay>
 
