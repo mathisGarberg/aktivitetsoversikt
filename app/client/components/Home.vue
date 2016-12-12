@@ -23,8 +23,8 @@
 <template>
   <main>
     <aside>
-      <button class="new-event" @click="showAddEventDialog = true">Opprett aktivitet</button>
       <calendar-filters></calendar-filters>
+      <button class="new-event" @click="showAddEventDialog = true">Opprett aktivitet</button>
     </aside>
     <div class="calendar-view">
       <calendar></calendar>
@@ -37,7 +37,13 @@
 </template>
 
 <style lang="sass">
+  main > aside {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .new-event {
+    flex: none;
     padding: 10px;
     border-radius: 5px;
     background: #009688;
@@ -57,7 +63,7 @@
   }
   
   .calendar-view {
-    flex: auto;
+    flex: 0 1 auto;
     background-image: url('/public/img/fotball-background.jpg');
     background-size: cover;
     background-position: center;

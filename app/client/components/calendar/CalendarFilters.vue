@@ -143,9 +143,7 @@
 
 <style lang="sass">
   .filters {
-    max-height: 100%;
     overflow: auto;
-    flex: auto;
     padding: 0 1rem;
 
     & h2 {
