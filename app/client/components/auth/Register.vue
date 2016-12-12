@@ -2,30 +2,55 @@
   export default {
     data() {
       return {
-        email: '',
-        phone: '',
-        fullName: '',
-        username: '',
-        password: '',
-        repeatedPassword: '',
+        email: {
+          value: '',
+          errors: [],
+        },
+        phone: {
+          value: '',
+          errors: [],
+        },
+        first_name: {
+          value: '',
+          errors: [],
+        },
+        last_name: {
+          value: '',
+          errors: [],
+        },
+        username: {
+          value: '',
+          errors: [],
+        },
+        password: {
+          value: '',
+          errors: [],
+        },
+        password_confirmed: {
+          value: '',
+          errors: [],
+        },
       };
     },
 
     methods: {
       async register(e) {
         const res = await this.$http.post('/auth/register', {
-          email: this.email,
-          phone: this.phone,
-          full_name: this.fullName,
-          username: this.username,
-          password: this.password,
-          password_confirmed: this.repeatedPassword,
+          email: this.email.value,
+          phone: this.phone.value,
+          first_name: this.first_name.value,
+          last_name: this.last_name.value,
+          username: this.username.value,
+          password: this.password.value,
+          password_confirmed: this.password_confirmed.value,
         });
 
         if (res.data.errors) {
           const errors = res.data.errors;
 
-          
+          for (let field of Object.keys(errors)) {
+            this[field].errors = errors[field];
+          }
         }
       },
     },
@@ -36,27 +61,52 @@
   <form class="auth-form">
     <label>
       <h3>Epost</h3>
-      <input type="email" v-model="email" placeholder="navn@domene.no">
+      <input type="email" v-model="email.value" placeholder="navn@domene.no">
+      <ul class="errors">
+        <li v-for="error in email.errors">{{ error }}</li>
+      </ul>
     </label>
     <label>
       <h3>Telefon- eller mobilnummer</h3>
-      <input type="text" v-model="phone" placeholder="+47 123 45 678">
+      <input type="text" v-model="phone.value" placeholder="+47 123 45 678">
+      <ul class="errors">
+        <li v-for="error in phone.errors">{{ error }}</li>
+      </ul>
     </label>
     <label>
-      <h3>Fullt navn</h3>
-      <input type="text" v-model="fullName" placeholder="Ola Nordmann">
+      <h3>Fornavn</h3>
+      <input type="text" v-model="first_name.value" placeholder="Ola">
+      <ul class="errors">
+        <li v-for="error in first_name.errors">{{ error }}</li>
+      </ul>
+    </label>
+    <label>
+      <h3>Etternavn</h3>
+      <input type="text" v-model="last_name.value" placeholder="Nordmann">
+      <ul class="errors">
+        <li v-for="error in last_name.errors">{{ error }}</li>
+      </ul>
     </label>
     <label>
       <h3>Brukernavn</h3>
-      <input type="text" v-model="username" placeholder="ola123">
+      <input type="text" v-model="username.value" placeholder="ola123">
+      <ul class="errors">
+        <li v-for="error in username.errors">{{ error }}</li>
+      </ul>
     </label>
     <label>
       <h3>Passord</h3>
-      <input type="password" v-model="password" placeholder="●●●●●●●●●●●●">
+      <input type="password" v-model="password.value" placeholder="●●●●●●●●●●●●">
+      <ul class="errors">
+        <li v-for="error in password.errors">{{ error }}</li>
+      </ul>
     </label>
     <label>
       <h3>Gjenta passord</h3>
-      <input type="password" v-model="repeatedPassword" placeholder="●●●●●●●●●●●●">
+      <input type="password" v-model="password_confirmed.value" placeholder="●●●●●●●●●●●●">
+      <ul class="errors">
+        <li v-for="error in password_confirmed.errors">{{ error }}</li>
+      </ul>
     </label>
     <button @click.prevent="register">OPPRETT NY BRUKER</button>
   </form>
