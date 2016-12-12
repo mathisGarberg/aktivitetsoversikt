@@ -194,7 +194,8 @@
 
       .navbar-right {
         display: flex;
-        font-size: 20px;
+        font-size: 1.25rem;
+        align-items: baseline;
 
         & button {
           margin-left: .5rem;
