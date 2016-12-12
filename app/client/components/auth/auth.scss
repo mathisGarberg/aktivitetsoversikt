@@ -26,8 +26,29 @@
       border-radius: .25rem;
     }
 
-    & .errors > li {
-      
+    & .errors {
+      padding: 0;
+
+      & li {
+        list-style: none;
+        color: var(--theme-red);
+        display: flex;
+        align-items: baseline;
+
+        &::before {
+          content: '!';
+          height: 1em;
+          width: 1em;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          margin-right: .5em;
+          line-height: 1;
+          color: white;
+          background: var(--theme-red);
+        }
+      }
     }
   }
 
@@ -44,7 +65,7 @@
       }
     }
   }
-  
+
   & .new-user {
     align-self: center;
   }
