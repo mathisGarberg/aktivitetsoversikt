@@ -37,6 +37,9 @@
               day: moment(event.t1).weekday() + 1,
               t1: moment(event.t1).hour() + moment(event.t1).minute() / 60,
               t2: moment(event.t2).hour() + moment(event.t2).minute() / 60,
+              dayOfMonth: moment(event.t1).date(),
+              nameOfMonth: moment(event.t1).format('MMMM'),
+              year: moment(event.t1).year(),
               category: event.category,
               description: event.description,
             };

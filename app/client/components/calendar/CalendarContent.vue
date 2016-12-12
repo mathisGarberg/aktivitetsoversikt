@@ -132,14 +132,41 @@
       <hr v-for="n in 24" :style="`top: calc(var(--timeblock-height) * ${n})`">
     </div>
     <dialog-overlay v-if="showEventDialog" @close="showEventDialog = false">
-      <h3 slot="title">Event</h3>
-      <div slot= "content">
-        <div>
-          <time>{{ shownEvent.t1 | numToTime }}</time>
-          <span>-</span> 
-          <time>{{ shownEvent.t2 | numToTime }}</time>
+      <h3 slot="title">Aktivitet</h3>
+      <div slot="content" class="event-dialog">
+        <div class="event-time-info">
+          <div class="month-number">{{ shownEvent.dayOfMonth }}</div>
+          <div>
+            <time>{{ shownEvent.t1 | numToTime }}</time>
+            <span>-</span> 
+            <time>{{ shownEvent.t2 | numToTime }}</time>
+          </div>
         </div>
-        <p class="description">{{ shownEvent.description }}</p>
+        <div>{{ shownEvent.nameOfMonth }}, {{ shownEvent.year }}</div>
+        <table>
+          <tr>
+            <th>Påmeldt:</th>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Sted:</th>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Aktivitet:</th>
+            <td>{{ shownEvent.category }}</td>
+          </tr>
+          <tr>
+            <th>Ansvarlig:</th>
+            <td>0</td>
+          </tr>
+        </table>
+        <div class="description">
+          <h3>Beskrivelse</h3>
+          <p>{{ shownEvent.description }}</p>
+        </div>
+        <p>Møt opp!</p>
+        <button>Delta</button>
       </div>
     </dialog-overlay>
   </div>
@@ -153,6 +180,70 @@
     overflow-y: scroll;
     background: var(--module-background);
     display: flex;
+
+    & .event-dialog {
+
+      & > :nth-child(n+3) {
+        margin-top: 1.5rem;
+      }
+
+      & .event-time-info {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+
+        & .month-number {
+          margin: 0;
+          font-size: 4rem;
+          margin-right: 1rem;
+        }
+
+        & time {
+          font-size: 1.5rem;
+        }
+      }
+
+      & table {
+
+        & th {
+          text-align: left;
+          font-weight: normal;
+        }
+      }
+
+      & .description {
+
+        & h3 {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: normal;
+        }
+
+        & p {
+          margin: 0;
+        }
+      }
+
+      & button {
+        flex: none;
+        align-self: flex-start;
+        padding: 10px;
+        border-radius: 5px;
+        background: #009688;
+        color: #FFF;
+        border: none;
+        display: block;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:active {
+          background: #00897B;
+        }
+
+      }
+    }
 
     & .today-bar {
       position: absolute;
