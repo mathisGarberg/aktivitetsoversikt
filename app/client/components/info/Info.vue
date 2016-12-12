@@ -8,16 +8,14 @@
   <main>
     <div class="info-content">
        <div class="app-usage">
-        <p>Brukerveiledning for applikasjonen:</p>
+         <p>Denne løsningen er utviklet av en gruppe studenter ved NTNU i Gjøvik.</p>
+         <p>Formålet med denne applikasjonen er å:</p>
          <ul>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-          <li>Brukspunkt 1</li>
-        </ul>
+           <li>Skape en oversikt over alle aktivitetene som foregår innenfor Heddal IL til enhver tid</li>
+           <li>Kunne tilpasse din egen kalender og abonnere på denne</li>
+           <li>Sende og motta informasjon om kommende aktiviteter og andre arrangementer</li>
+           <li>Kunne delta på ulike aktiviteter og samtidig gi treneren oversikt over hvem som kommer</li>
+         </ul>
        </div>
     </div>
   </main>
@@ -31,6 +29,11 @@
     
     & .app-usage {
       width: 100%;
+      
+      & li {
+        margin-top: .5rem;
+      }
+      
     }
     
   }
