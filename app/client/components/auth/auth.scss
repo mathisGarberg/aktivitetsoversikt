@@ -28,6 +28,11 @@
 
     & .errors {
       padding: 0;
+      margin: .5rem 0 0;
+      
+      &:empty {
+        display: none;
+      }
 
       & li {
         list-style: none;
