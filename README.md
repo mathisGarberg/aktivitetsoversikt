@@ -2,6 +2,11 @@
 
 The project consists of a server part and a client part. On the client side Vue.js is used and on the server side Express.js is used.
 
+## Note
+Commit [15e6e8f](https://github.com/mathisGarberg/aktivitetsoversikt/tree/15e6e8f8aec3f0aa91167da926fcf79b95907a42)
+was the final commit before the deadline (12th of December 2016). Any commits after that are done outside the scope
+of the assignment.
+
 ## Initial setup
 * `git clone` the project
 * Run `npm install` to install the dependencies
@@ -27,8 +32,9 @@ The project is served at localhost:3000 by default.
 ```
 
 ## Admin user
-Username: admin
-Password: fotball
+| Username    | Password   |
+| ------------|------------|
+| admin       | fotball    |
 
 The admin user will be added to the database automatically once it's created, so this user
-can be used right off the bat.
+can be used right off the bat. The admin user has elevated privileges compared to regualr users.
