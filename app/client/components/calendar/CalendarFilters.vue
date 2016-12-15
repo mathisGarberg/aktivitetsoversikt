@@ -17,20 +17,20 @@
         const femaleTeams = await this.$http.get('/event/team/female');
 
         this.categories = categories.data.map(item => {
-          const checked = Cookies.get(`categories.${item.id}`) === 'true';
-          item.checked = checked;
+          const checked = Cookies.get(`categories.${item.id}`);
+          item.checked = typeof checked === 'undefined' ? true : checked;
           return item;
         });
 
         this.maleTeams = maleTeams.data.map(item => {
-          const checked = Cookies.get(`maleTeams.${item.id}`) === 'true';
-          item.checked = checked;
+          const checked = Cookies.get(`maleTeams.${item.id}`);
+          item.checked = typeof checked === 'undefined' ? true : checked;
           return item;
         });
 
         this.femaleTeams = femaleTeams.data.map(item => {
-          const checked = Cookies.get(`femaleTeams.${item.id}`) === 'true';
-          item.checked = checked;
+          const checked = Cookies.get(`femaleTeams.${item.id}`);
+          item.checked = typeof checked === 'undefined' ? true : checked;
           return item;
         });
       },
