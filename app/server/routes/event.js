@@ -14,7 +14,6 @@ router.get('/', async function(req, res, next) {
 });
 
 router.post('/add', async function(req, res, next) {
-    try {
     const {
         team_id,
         t1,
@@ -24,14 +23,9 @@ router.post('/add', async function(req, res, next) {
 
     const event_id = await req.db.filter.addEvent(team_id, t1, t2, description);
 
-    console.log(event_id);
-
     res.json({
         event_id,
     });
-    } catch(err) {
-        next(err);
-    }
 });
 
 router.get('/category', async function(req, res) {
