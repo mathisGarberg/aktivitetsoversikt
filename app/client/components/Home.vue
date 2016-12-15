@@ -35,7 +35,7 @@
     </div>
     <dialog-overlay v-if="showAddEventDialog" @close="showAddEventDialog = false">
       <h3 slot="title">Opprett aktivitet</h3>
-      <div slot= "content"><event></event></div>
+      <div slot= "content"><event @close="showAddEventDialog = false"></event></div>
     </dialog-overlay>
   </main>
 </template>

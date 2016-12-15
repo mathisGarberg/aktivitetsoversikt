@@ -14,7 +14,15 @@ export default function(conn) {
         async findTeams() {
             return await conn.query(`
                 SELECT team.*, category.name AS category FROM team
-                JOIN category ON category.id = team.category_id`);
+                JOIN category ON category.id = team.category_id
+            `);
+        },
+
+        async findTeamsForCategoryId(categoryId) {
+            return await conn.query(`
+                SELECT team.*, category.name AS category FROM team
+                JOIN category ON category.id = team.category_id AND category.id = ?
+            `, [categoryId]);
         },
 
         async findMaleTeams() {
@@ -30,10 +38,10 @@ export default function(conn) {
         },
 
         async findFilteredEvents(year, week, teamIds) {
-            const csv = teamIds.reduce((accumulator, currentValue) => `${accumulator},${currentValue}`);
-
             const startDate = moment().year(year).week(week).startOf('week').toDate();
             const endDate = moment(startDate).endOf('week').toDate();
+
+            const csv = teamIds.map(id => '?').reduce((l, r) => `${l},${r}`);
 
             return await conn.query(`
                 SELECT
@@ -48,16 +56,18 @@ export default function(conn) {
                     AND team.id IN (${csv})
                 JOIN category
                     ON team.category_id = category.id
-            `, [startDate, endDate]);
+            `, [startDate, endDate].concat(teamIds));
         },
 
         async addEvent(team_id, t1, t2, description) {
-            await conn.query('INSERT INTO event SET ?', {
+            const result = await conn.query('INSERT INTO event SET ?', {
                 team_id,
-                t1,
-                t2,
+                t1: new Date(t1),
+                t2: new Date(t2),
                 description,
             });
+
+            return result.insertId;
         },
 
         async deleteEvent(id) {

@@ -123,6 +123,10 @@
         this.fetchData();
       });
 
+      this.eventHub.$on('event added', () => {
+        this.fetchData();
+      });
+
       const dayGridEl = this.$refs.daysGrid;
 
       dayGridEl.style.overflowY = 'scroll';

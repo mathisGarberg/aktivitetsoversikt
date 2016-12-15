@@ -37,4 +37,4 @@ The project is served at localhost:3000 by default.
 | admin       | fotball    |
 
 The admin user will be added to the database automatically once it's created, so this user
-can be used right off the bat. The admin user has elevated privileges compared to regualr users.
+can be used right off the bat. The admin user has elevated privileges compared to regualar users.

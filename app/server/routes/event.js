@@ -13,8 +13,33 @@ router.get('/', async function(req, res, next) {
     res.json(await req.db.filter.findFilteredEvents(year, week, teamIds));
 });
 
+router.post('/add', async function(req, res, next) {
+    try {
+    const {
+        team_id,
+        t1,
+        t2,
+        description,
+    } = req.body;
+
+    const event_id = await req.db.filter.addEvent(team_id, t1, t2, description);
+
+    console.log(event_id);
+
+    res.json({
+        event_id,
+    });
+    } catch(err) {
+        next(err);
+    }
+});
+
 router.get('/category', async function(req, res) {
     res.json(await req.db.filter.findCategories());
+});
+
+router.get('/team/category/:id', async function(req, res) {
+    res.json(await req.db.filter.findTeamsForCategoryId(req.params.id));
 });
 
 router.get('/team/male', async function(req, res) {
